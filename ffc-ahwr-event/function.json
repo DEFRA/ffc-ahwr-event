@@ -1,0 +1,18 @@
+{
+  "bindings": [
+    {
+      "name": "message",
+      "type": "serviceBusTrigger",
+      "direction": "in",
+      "queueName": "%AHWR_EVENT_QUEUE%",
+      "connection": "ServiceBusConnectionString"
+    },
+    {
+      "tableName": "%AZURE_STORAGE_TABLE%",
+      "connection": "TableConnectionString",
+      "name": "tableBinding",
+      "type": "table",
+      "direction": "out"
+    }
+  ]
+}
