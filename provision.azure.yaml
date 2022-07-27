@@ -1,6 +1,5 @@
 resources:
-  topics:
+  queues:
     - name: ffc-ahwr-event
-    - name: ffc-ahwr-projection
   storage:
     - name: ffcahwrevent
