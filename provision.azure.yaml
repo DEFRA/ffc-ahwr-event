@@ -1,0 +1,5 @@
+resources:
+  queues:
+    - name: ffc-ahwr-event
+  storage:
+    - name: ffcahwrevent

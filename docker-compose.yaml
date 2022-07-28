@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  ffc-ahwr-event-azurite:
+    image: mcr.microsoft.com/azure-storage/azurite:3.17.1
+    command: "azurite --blobHost 0.0.0.0 --queueHost 0.0.0.0 --tableHost 0.0.0.0 --loose"
+    volumes:
+      - azurite_data:/data
+    ports:
+      - "10002:10000"
+      - "10003:10001"
+      - "10004:10002"
+
+volumes:
+  azurite_data:
