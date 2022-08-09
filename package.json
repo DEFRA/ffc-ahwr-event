@@ -4,7 +4,7 @@
   "description": "Azure Function to process Vet Vists back office events",
   "author": "Defra",
   "contributors": [
-    "Steve Dickinson <steve.dickinson@defra.gov.uk>"
+    "Steve Dickinson <steve.dickinson@defra.gov.uk"
   ],
   "scripts": {
     "lint": "standard",
