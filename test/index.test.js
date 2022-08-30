@@ -12,6 +12,8 @@ describe('index function', () => {
       name: 'test',
       properties: {
         id: '123456789',
+        sbi: '123456789',
+        cph: '123/456/789',
         checkpoint: 'test',
         status: 'testing',
         action: {

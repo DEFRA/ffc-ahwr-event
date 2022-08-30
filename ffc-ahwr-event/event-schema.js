@@ -4,6 +4,8 @@ const eventSchema = joi.object({
   name: joi.string().required(),
   properties: joi.object({
     id: joi.string().required(),
+    sbi: joi.string().required(),
+    cph: joi.string().required(),
     checkpoint: joi.string().required(),
     status: joi.string().required(),
     action: joi.object({
