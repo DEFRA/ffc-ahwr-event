@@ -7,6 +7,8 @@ describe('Event function', () => {
   const message = {
     properties: {
       id: '123456789',
+      sbi: '123456789',
+      cph: '123/456/789',
       status: 'in progress',
       action: {
         type: 'event',
