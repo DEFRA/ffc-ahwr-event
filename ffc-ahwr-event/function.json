@@ -13,6 +13,13 @@
       "name": "tableBinding",
       "type": "table",
       "direction": "out"
+    },
+    {
+      "tableName": "monitoring",
+      "connection": "TableConnectionString",
+      "name": "tableMonitoringBinding",
+      "type": "table",
+      "direction": "out"
     }
   ]
 }
