@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@azure/data-tables": "^13.0.1",
-    "@azure/identity": "^2.0.2",
+    "@azure/identity": "^3.1.2",
     "ffc-protective-monitoring": "^1.0.4",
     "joi": "^17.4.1"
   },
