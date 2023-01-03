@@ -10,6 +10,7 @@
     "AZURE_STORAGE_TABLE": "ahwreventstore",
     "AHWR_EVENT_QUEUE": "ffc-ahwr-event",
     "MONITORING_APPLICATION": "ffc-ahwr",
-    "PMC_CODE": "code"
+    "PMC_CODE": "code",
+    "MONITORING_URL": ""
   }
 }
