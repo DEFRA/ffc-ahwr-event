@@ -1,7 +1,7 @@
 const { saveEvent } = require('./event')
 const { saveMonitoring } = require('./monitoring')
 const { validateEvent } = require('./event-schema')
-const { sendEvent } = require('./protective-monitoring')
+const { saveMonitoringEvent } = require('./protective-monitoring')
 
 module.exports = async function (context, message) {
   const event = message
@@ -10,9 +10,12 @@ module.exports = async function (context, message) {
   if (event.name === 'send-session-event') {
     if (validateEvent(event)) {
       await saveEvent(context, event)
-      await sendEvent(context, event)
     }
   } else {
     await saveMonitoring(context, event)
+  }
+
+  if (process.env.MONITORING_ENABLED) {
+    await saveMonitoringEvent(context, event)
   }
 }

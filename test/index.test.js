@@ -37,14 +37,22 @@ describe('index function', () => {
     jest.resetAllMocks()
   })
 
-  test('receives message from service bus and successfully calls save event', async () => {
+  test('receives message from service bus and successfully calls save event, does not call monitoring event', async () => {
     await processEvent(mockContext, message)
     expect(mockEvent.saveEvent).toHaveBeenCalledTimes(1)
-    expect(mockProtectiveMonitoringEvent.sendEvent).toHaveBeenCalledTimes(1)
+    expect(mockProtectiveMonitoringEvent.saveMonitoringEvent).toHaveBeenCalledTimes(0)
+  })
+
+  test('receives message from service bus and successfully calls save event', async () => {
+    process.env.MONITORING_ENABLED = true
+    await processEvent(mockContext, message)
+    expect(mockEvent.saveEvent).toHaveBeenCalledTimes(1)
+    expect(mockProtectiveMonitoringEvent.saveMonitoringEvent).toHaveBeenCalledTimes(1)
   })
 
   test('receives message from service bus and successfully calls save monitoring event', async () => {
     message.name = 'send-monitoring-event'
+    process.env.MONITORING_ENABLED = true
     await processEvent(mockContext, message)
     expect(mockMonitoringEvent.saveMonitoring).toHaveBeenCalledTimes(1)
   })
@@ -53,13 +61,11 @@ describe('index function', () => {
     message.properties.id = 123456789
     await processEvent(mockContext, message)
     expect(mockEvent.saveEvent).toHaveBeenCalledTimes(0)
-    expect(mockProtectiveMonitoringEvent.sendEvent).toHaveBeenCalledTimes(0)
   })
 
   test('receives message from service bus with no action property and does not calls save event', async () => {
     delete message.properties.action
     await processEvent(mockContext, message)
     expect(mockEvent.saveEvent).toHaveBeenCalledTimes(0)
-    expect(mockProtectiveMonitoringEvent.sendEvent).toHaveBeenCalledTimes(0)
   })
 })

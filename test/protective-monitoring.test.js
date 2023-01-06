@@ -1,4 +1,4 @@
-const { sendEvent } = require('../ffc-ahwr-event/protective-monitoring')
+const { saveMonitoringEvent } = require('../ffc-ahwr-event/protective-monitoring')
 const mockContext = require('./mock-context')
 
 const mockSendEvent = jest.fn()
@@ -34,7 +34,7 @@ describe('Event function', () => {
   })
 
   test('Send event', async () => {
-    await sendEvent(mockContext, message)
+    await saveMonitoringEvent(mockContext, message)
     expect(mockSendEvent).toHaveBeenCalledTimes(1)
   })
 })

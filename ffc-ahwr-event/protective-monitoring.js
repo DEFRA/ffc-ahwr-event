@@ -1,6 +1,6 @@
 const { PublishEvent } = require('ffc-protective-monitoring')
 
-async function sendEvent (context, event) {
+async function saveMonitoringEvent (context, event) {
   const raisedEvent = event.properties
   const { sbi, ip } = raisedEvent
   const cph = raisedEvent.cph.replace(/\//g, '')
@@ -28,4 +28,4 @@ function createEventDate () {
   return eventDate.toISOString()
 }
 
-module.exports = { sendEvent }
+module.exports = { saveMonitoringEvent }
