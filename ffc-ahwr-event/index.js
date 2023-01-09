@@ -13,9 +13,8 @@ module.exports = async function (context, message) {
     }
   } else {
     await saveMonitoring(context, event)
-  }
-
-  if (process.env.MONITORING_ENABLED) {
-    await saveMonitoringEvent(context, event)
+    if (process.env.MONITORING_ENABLED) {
+      await saveMonitoringEvent(context, event)
+    }
   }
 }

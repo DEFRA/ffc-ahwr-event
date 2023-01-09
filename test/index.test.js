@@ -44,10 +44,9 @@ describe('index function', () => {
   })
 
   test('receives message from service bus and successfully calls save event', async () => {
-    process.env.MONITORING_ENABLED = true
     await processEvent(mockContext, message)
     expect(mockEvent.saveEvent).toHaveBeenCalledTimes(1)
-    expect(mockProtectiveMonitoringEvent.saveMonitoringEvent).toHaveBeenCalledTimes(1)
+    expect(mockProtectiveMonitoringEvent.saveMonitoringEvent).toHaveBeenCalledTimes(0)
   })
 
   test('receives message from service bus and successfully calls save monitoring event', async () => {
@@ -55,6 +54,7 @@ describe('index function', () => {
     process.env.MONITORING_ENABLED = true
     await processEvent(mockContext, message)
     expect(mockMonitoringEvent.saveMonitoring).toHaveBeenCalledTimes(1)
+    expect(mockProtectiveMonitoringEvent.saveMonitoringEvent).toHaveBeenCalledTimes(1)
   })
 
   test('receives message from service bus with invalid id and does not calls save event', async () => {
