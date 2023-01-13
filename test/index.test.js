@@ -4,6 +4,9 @@ const mockEvent = require('../ffc-ahwr-event/event')
 jest.mock('../ffc-ahwr-event/monitoring')
 const mockMonitoringEvent = require('../ffc-ahwr-event/monitoring')
 
+jest.mock('../ffc-ahwr-event/protective-monitoring')
+const mockProtectiveMonitoringEvent = require('../ffc-ahwr-event/protective-monitoring')
+
 const processEvent = require('../ffc-ahwr-event/index')
 const mockContext = require('./mock-context')
 
@@ -34,15 +37,24 @@ describe('index function', () => {
     jest.resetAllMocks()
   })
 
+  test('receives message from service bus and successfully calls save event, does not call monitoring event', async () => {
+    await processEvent(mockContext, message)
+    expect(mockEvent.saveEvent).toHaveBeenCalledTimes(1)
+    expect(mockProtectiveMonitoringEvent.saveMonitoringEvent).toHaveBeenCalledTimes(0)
+  })
+
   test('receives message from service bus and successfully calls save event', async () => {
     await processEvent(mockContext, message)
     expect(mockEvent.saveEvent).toHaveBeenCalledTimes(1)
+    expect(mockProtectiveMonitoringEvent.saveMonitoringEvent).toHaveBeenCalledTimes(0)
   })
 
   test('receives message from service bus and successfully calls save monitoring event', async () => {
     message.name = 'send-monitoring-event'
+    process.env.MONITORING_ENABLED = true
     await processEvent(mockContext, message)
     expect(mockMonitoringEvent.saveMonitoring).toHaveBeenCalledTimes(1)
+    expect(mockProtectiveMonitoringEvent.saveMonitoringEvent).toHaveBeenCalledTimes(1)
   })
 
   test('receives message from service bus with invalid id and does not calls save event', async () => {

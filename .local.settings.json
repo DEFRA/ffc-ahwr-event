@@ -8,6 +8,10 @@
     "AZURE_STORAGE_USE_CONNECTION_STRING": "true",
     "AZURE_STORAGE_ACCOUNT_NAME": "devstoreaccount1",
     "AZURE_STORAGE_TABLE": "ahwreventstore",
-    "AHWR_EVENT_QUEUE": "ffc-ahwr-event"
+    "AHWR_EVENT_QUEUE": "ffc-ahwr-event",
+    "MONITORING_APPLICATION": "ffc-ahwr",
+    "PMC_CODE": "code",
+    "MONITORING_URL": "",
+    "MONITORING_ENABLED": false
   }
 }

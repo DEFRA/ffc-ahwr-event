@@ -1,6 +1,6 @@
 {
   "name": "ffc-ahwr-event",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Azure Function to process Vet Vists back office events",
   "author": "Defra",
   "contributors": [
@@ -17,8 +17,14 @@
   },
   "dependencies": {
     "@azure/data-tables": "^13.0.1",
-    "@azure/identity": "^2.0.2",
+    "@azure/identity": "^3.1.2",
+    "ffc-protective-monitoring": "^1.0.4",
     "joi": "^17.4.1"
+  },
+  "overrides": {
+    "@azure/identity": {
+      "jsonwebtoken": "9.0.0"
+    }
   },
   "devDependencies": {
     "@types/jest": "^27.0.0",
