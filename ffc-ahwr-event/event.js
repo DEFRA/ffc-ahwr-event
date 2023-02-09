@@ -4,12 +4,11 @@ const saveEvent = async (context, event) => {
   const raisedEvent = event.properties
   const eventType = raisedEvent.action.type
   const sbi = raisedEvent.sbi
-  const cph = raisedEvent.cph.replace(/\//g, '')
   const eventRaised = new Date(raisedEvent.action.raisedOn)
   const eventRaisedBy = raisedEvent.action.raisedBy
   const timespan = new Date(raisedEvent.action.raisedOn).getTime()
 
-  const partitionKey = `${sbi}_${cph}`
+  const partitionKey = `${sbi}}`
   let rowKey = `${partitionKey}_${timespan}`
   const sessionId = raisedEvent.id.toString()
 
