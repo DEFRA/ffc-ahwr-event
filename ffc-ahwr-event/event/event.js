@@ -1,4 +1,4 @@
-const { queryEntities } = require('./storage')
+const queryEntities = require('./query-entities')
 
 const saveEvent = async (context, event) => {
   const raisedEvent = event.properties

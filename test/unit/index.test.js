@@ -1,14 +1,14 @@
-jest.mock('../ffc-ahwr-event/event')
-const mockEvent = require('../ffc-ahwr-event/event')
+jest.mock('../../ffc-ahwr-event/event/event')
+const mockEvent = require('../../ffc-ahwr-event/event/event')
 
-jest.mock('../ffc-ahwr-event/monitoring')
-const mockMonitoringEvent = require('../ffc-ahwr-event/monitoring')
+jest.mock('../../ffc-ahwr-event/monitoring/monitoring')
+const mockMonitoringEvent = require('../../ffc-ahwr-event/monitoring/monitoring')
 
-jest.mock('../ffc-ahwr-event/protective-monitoring')
-const mockProtectiveMonitoringEvent = require('../ffc-ahwr-event/protective-monitoring')
+jest.mock('../../ffc-ahwr-event/monitoring/protective-monitoring')
+const mockProtectiveMonitoringEvent = require('../../ffc-ahwr-event/monitoring/protective-monitoring')
 
-const processEvent = require('../ffc-ahwr-event/index')
-const mockContext = require('./mock-context')
+const processEvent = require('../../ffc-ahwr-event/index')
+const mockContext = require('../mock/mock-context')
 
 let message
 

@@ -1,7 +1,7 @@
-const { saveEvent } = require('./event')
-const { saveMonitoring } = require('./monitoring')
-const { validateEvent } = require('./event-schema')
-const { saveMonitoringEvent } = require('./protective-monitoring')
+const { saveEvent } = require('./event/event')
+const { validateEvent } = require('./event/event-schema')
+const { saveMonitoring } = require('./monitoring/monitoring')
+const { saveMonitoringEvent } = require('./monitoring/protective-monitoring')
 
 module.exports = async function (context, message) {
   const event = message

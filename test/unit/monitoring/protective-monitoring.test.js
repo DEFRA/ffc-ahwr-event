@@ -1,5 +1,5 @@
-const { saveMonitoringEvent } = require('../ffc-ahwr-event/protective-monitoring')
-const mockContext = require('./mock-context')
+const { saveMonitoringEvent } = require('../../../ffc-ahwr-event/monitoring/protective-monitoring')
+const mockContext = require('../../mock/mock-context')
 
 const mockSendEvent = jest.fn()
 jest.mock('ffc-protective-monitoring', () => {
