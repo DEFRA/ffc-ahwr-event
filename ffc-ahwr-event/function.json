@@ -15,6 +15,13 @@
       "direction": "out"
     },
     {
+      "tableName": "ffcahwrapplicationstatus",
+      "connection": "TableConnectionString",
+      "name": "tableBinding",
+      "type": "table",
+      "direction": "out"
+    },
+    {
       "tableName": "monitoring",
       "connection": "TableConnectionString",
       "name": "tableMonitoringBinding",
