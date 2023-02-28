@@ -1,7 +1,7 @@
 const queryEntities = require('../azure-storage/query-entities')
 
-const onApplicationStatusChanged = async (context, event) => {
-  console.log(`${new Date().toISOString()} Application status changed: ${JSON.stringify({ event })}`)
+const onApplicationStatusEvent = async (context, event) => {
+  console.log(`${new Date().toISOString()} On application status event: ${JSON.stringify({ event })}`)
 
   const partitionKey = `${event.properties.sbi}`
   let rowKey = `${partitionKey}_${new Date(event.properties.action.raisedOn).getTime()}`
@@ -28,10 +28,10 @@ const onApplicationStatusChanged = async (context, event) => {
     Remark: event.properties.action.data.remark
   })
 
-  console.log(`${new Date().toISOString()} Application Status Changed event has been saved successfully: ${JSON.stringify({
+  console.log(`${new Date().toISOString()} 'application-status-event' has been saved successfully: ${JSON.stringify({
     partitionKey,
     rowKey
   })}`)
 }
 
-module.exports = onApplicationStatusChanged
+module.exports = onApplicationStatusEvent

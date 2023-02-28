@@ -1,6 +1,6 @@
 const MOCK_NOW = new Date()
 
-describe('On Application Status Changed', () => {
+describe('onApplicationStatusEvent', () => {
   let logSpy
 
   beforeAll(() => {
@@ -21,13 +21,13 @@ describe('On Application Status Changed', () => {
 
   test.each([
     {
-      toString: () => 'Application status changed',
+      toString: () => 'success',
       given: {
         context: {
           bindings: {}
         },
         event: {
-          name: 'application-status-changed',
+          name: 'application-status-event',
           properties: {
             id: 'eventID',
             sbi: '123456789',
@@ -59,9 +59,9 @@ describe('On Application Status Changed', () => {
           }
         ],
         consoleLogs: [
-          `${MOCK_NOW.toISOString()} Application status changed: ${JSON.stringify({
+          `${MOCK_NOW.toISOString()} On application status event: ${JSON.stringify({
             event: {
-              name: 'application-status-changed',
+              name: 'application-status-event',
               properties: {
                 id: 'eventID',
                 sbi: '123456789',
@@ -80,7 +80,7 @@ describe('On Application Status Changed', () => {
           `${MOCK_NOW.toISOString()} Creating the table client using the DefaultAzureCredential: ${JSON.stringify({
             tableName: 'ffcahwrapplicationstatus'
           })}`,
-          `${MOCK_NOW.toISOString()} Application Status Changed event has been saved successfully: ${JSON.stringify({
+          `${MOCK_NOW.toISOString()} 'application-status-event' has been saved successfully: ${JSON.stringify({
             partitionKey: '123456789',
             rowKey: `123456789_${MOCK_NOW.getTime()}`
           })}`
@@ -88,13 +88,13 @@ describe('On Application Status Changed', () => {
       }
     },
     {
-      toString: () => 'A duplicate event',
+      toString: () => 'duplicate',
       given: {
         context: {
           bindings: {}
         },
         event: {
-          name: 'application-status-changed',
+          name: 'application-status-event',
           properties: {
             id: 'eventID',
             sbi: '123456789',
@@ -128,9 +128,9 @@ describe('On Application Status Changed', () => {
           }
         ],
         consoleLogs: [
-          `${MOCK_NOW.toISOString()} Application status changed: ${JSON.stringify({
+          `${MOCK_NOW.toISOString()} On application status event: ${JSON.stringify({
             event: {
-              name: 'application-status-changed',
+              name: 'application-status-event',
               properties: {
                 id: 'eventID',
                 sbi: '123456789',
@@ -149,7 +149,7 @@ describe('On Application Status Changed', () => {
           `${MOCK_NOW.toISOString()} Creating the table client using the DefaultAzureCredential: ${JSON.stringify({
             tableName: 'ffcahwrapplicationstatus'
           })}`,
-          `${MOCK_NOW.toISOString()} Application Status Changed event has been saved successfully: ${JSON.stringify({
+          `${MOCK_NOW.toISOString()} 'application-status-event' has been saved successfully: ${JSON.stringify({
             partitionKey: '123456789',
             rowKey: `eventID_${MOCK_NOW.getTime()}`
           })}`
@@ -173,7 +173,7 @@ describe('On Application Status Changed', () => {
       }
     })
 
-    const onApplicationStatusChanged = require('../../../ffc-ahwr-event/application-status-changed')
+    const onApplicationStatusChanged = require('../../../ffc-ahwr-event/application-status-event')
     await onApplicationStatusChanged(
       testCase.given.context,
       testCase.given.event
