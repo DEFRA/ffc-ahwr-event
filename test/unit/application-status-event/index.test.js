@@ -59,26 +59,17 @@ describe('onApplicationStatusEvent', () => {
           }
         ],
         consoleLogs: [
-          `${MOCK_NOW.toISOString()} On application status event: ${JSON.stringify({
-            event: {
-              name: 'application-status-event',
-              properties: {
-                id: 'eventID',
-                sbi: '123456789',
-                status: 'success',
-                action: {
-                  data: {
-                    applicationStatus: 'AGREED',
-                    remark: 'Remark'
-                  },
-                  raisedOn: MOCK_NOW.toISOString(),
-                  raisedBy: 'business@email.com'
-                }
-              }
-            }
-          })}`,
           `${MOCK_NOW.toISOString()} Creating the table client using the DefaultAzureCredential: ${JSON.stringify({
             tableName: 'ffcahwrapplicationstatus'
+          })}`,
+          `${MOCK_NOW.toISOString()} 'application-status-event' created: ${JSON.stringify({
+            PartitionKey: '123456789',
+            RowKey: `123456789_${MOCK_NOW.getTime()}`,
+            Status: 'success',
+            ChangedBy: 'business@email.com',
+            ChangedOn: MOCK_NOW.toISOString(),
+            ApplicationStatus: 'AGREED',
+            Remark: 'Remark'
           })}`,
           `${MOCK_NOW.toISOString()} 'application-status-event' has been saved successfully: ${JSON.stringify({
             partitionKey: '123456789',
@@ -128,26 +119,17 @@ describe('onApplicationStatusEvent', () => {
           }
         ],
         consoleLogs: [
-          `${MOCK_NOW.toISOString()} On application status event: ${JSON.stringify({
-            event: {
-              name: 'application-status-event',
-              properties: {
-                id: 'eventID',
-                sbi: '123456789',
-                status: 'success',
-                action: {
-                  data: {
-                    applicationStatus: 'AGREED',
-                    remark: 'Remark'
-                  },
-                  raisedOn: MOCK_NOW.toISOString(),
-                  raisedBy: 'business@email.com'
-                }
-              }
-            }
-          })}`,
           `${MOCK_NOW.toISOString()} Creating the table client using the DefaultAzureCredential: ${JSON.stringify({
             tableName: 'ffcahwrapplicationstatus'
+          })}`,
+          `${MOCK_NOW.toISOString()} 'application-status-event' created: ${JSON.stringify({
+            PartitionKey: '123456789',
+            RowKey: `eventID_${MOCK_NOW.getTime()}`,
+            Status: 'duplicate event',
+            ChangedBy: 'business@email.com',
+            ChangedOn: MOCK_NOW.toISOString(),
+            ApplicationStatus: 'AGREED',
+            Remark: 'Remark'
           })}`,
           `${MOCK_NOW.toISOString()} 'application-status-event' has been saved successfully: ${JSON.stringify({
             partitionKey: '123456789',
