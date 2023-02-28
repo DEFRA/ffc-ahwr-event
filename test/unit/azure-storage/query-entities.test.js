@@ -20,7 +20,7 @@ describe('storage function', () => {
       }
     })
 
-    queryEntities = require('../../../ffc-ahwr-event/event/query-entities')
+    queryEntities = require('../../../ffc-ahwr-event/azure-storage/query-entities')
   })
 
   afterAll(() => {
@@ -32,9 +32,10 @@ describe('storage function', () => {
   })
 
   test('return 3 events', async () => {
+    const tableName = 'table_name'
     const partitionKey = '123'
     const rowKey = '123_456'
-    const events = await queryEntities(partitionKey, rowKey)
+    const events = await queryEntities(tableName, partitionKey, rowKey)
     expect(events.length).toEqual(3)
   })
 

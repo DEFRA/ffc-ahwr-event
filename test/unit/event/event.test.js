@@ -1,8 +1,8 @@
-const queryEntities = require('../../../ffc-ahwr-event/event/query-entities')
+const queryEntities = require('../../../ffc-ahwr-event/azure-storage/query-entities')
 const { saveEvent } = require('../../../ffc-ahwr-event/event/event')
 const mockContext = require('../../mock/mock-context')
 
-jest.mock('../../../ffc-ahwr-event/event/query-entities')
+jest.mock('../../../ffc-ahwr-event/azure-storage/query-entities')
 
 describe('Event function', () => {
   const message = {

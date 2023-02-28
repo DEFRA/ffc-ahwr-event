@@ -1,11 +1,9 @@
 const { odata } = require('@azure/data-tables')
 const createTableClient = require('../azure-storage/create-table-client')
 
-const tableName = process.env.AZURE_STORAGE_TABLE
-
-const queryEntities = async (partitionKey, rowKey) => {
+const queryEntities = async (tableName, partitionKey, rowKey) => {
   const events = []
-  if (partitionKey && rowKey) {
+  if (tableName && partitionKey && rowKey) {
     const tableClient = createTableClient(tableName)
     await tableClient.createTable(tableName)
     const eventResults = tableClient.listEntities(

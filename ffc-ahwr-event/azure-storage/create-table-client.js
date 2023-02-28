@@ -3,7 +3,7 @@ const { TableClient } = require('@azure/data-tables')
 
 const createTableClient = (tableName) => {
   if (process.env.AZURE_STORAGE_USE_CONNECTION_STRING) {
-    console.log(`Creating the table client using the connection string: ${JSON.stringify({
+    console.log(`${new Date().toISOString()} Creating the table client using the connection string: ${JSON.stringify({
       connectionString: process.env.TableConnectionString,
       tableName
     })}`)
@@ -15,7 +15,7 @@ const createTableClient = (tableName) => {
       }
     )
   } else {
-    console.log(`Creating the table client using the DefaultAzureCredential: ${JSON.stringify({
+    console.log(`${new Date().toISOString()} Creating the table client using the DefaultAzureCredential: ${JSON.stringify({
       accountName: process.env.AZURE_STORAGE_ACCOUNT_NAME,
       tableName
     })}`)
