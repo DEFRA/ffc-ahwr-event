@@ -47,7 +47,7 @@ describe('onApplicationStatusEvent', () => {
         entities: []
       },
       expect: {
-        tableBinding: [
+        applicationstatusBinding: [
           {
             PartitionKey: '123456789',
             RowKey: `123456789_${MOCK_NOW.getTime()}`,
@@ -113,7 +113,7 @@ describe('onApplicationStatusEvent', () => {
         ]
       },
       expect: {
-        tableBinding: [
+        applicationstatusBinding: [
           {
             PartitionKey: '123456789',
             RowKey: `eventID_${MOCK_NOW.getTime()}`,
@@ -173,7 +173,7 @@ describe('onApplicationStatusEvent', () => {
       testCase.given.event
     )
 
-    expect(testCase.given.context.bindings.tableBinding).toEqual(testCase.expect.tableBinding)
+    expect(testCase.given.context.bindings.applicationstatusBinding).toEqual(testCase.expect.applicationstatusBinding)
     testCase.expect.consoleLogs.forEach(
       (consoleLog, idx) => expect(logSpy).toHaveBeenNthCalledWith(idx + 1, consoleLog)
     )

@@ -25,8 +25,8 @@ const onApplicationStatusEvent = async (context, event) => {
   console.log(`${new Date().toISOString()} 'application-status-event' created: ${JSON.stringify(
     applicationStatusEvent
   )}`)
-  context.bindings.tableBinding = []
-  context.bindings.tableBinding.push(applicationStatusEvent)
+  context.bindings.applicationstatusBinding = []
+  context.bindings.applicationstatusBinding.push(applicationStatusEvent)
   console.log(`${new Date().toISOString()} 'application-status-event' has been saved successfully: ${JSON.stringify({
     partitionKey,
     rowKey

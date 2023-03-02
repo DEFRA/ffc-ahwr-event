@@ -17,7 +17,7 @@
     {
       "tableName": "ffcahwrapplicationstatus",
       "connection": "TableConnectionString",
-      "name": "tableBinding",
+      "name": "applicationstatusBinding",
       "type": "table",
       "direction": "out"
     },
