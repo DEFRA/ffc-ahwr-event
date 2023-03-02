@@ -15,11 +15,12 @@ const onApplicationStatusEvent = async (context, event) => {
   const applicationStatusEvent = {
     PartitionKey: partitionKey,
     RowKey: rowKey,
+    EventId: event.properties.id,
+    EventType: event.properties.action.type,
     Status: event.properties.status,
+    Payload: event.properties.action.data,
     ChangedBy: event.properties.action.raisedBy,
-    ChangedOn: event.properties.action.raisedOn,
-    ApplicationStatus: event.properties.action.data.applicationStatus,
-    Remark: event.properties.action.data.remark
+    ChangedOn: event.properties.action.raisedOn
   }
   console.log(`${new Date().toISOString()} 'application-status-event' created: ${JSON.stringify(
     applicationStatusEvent

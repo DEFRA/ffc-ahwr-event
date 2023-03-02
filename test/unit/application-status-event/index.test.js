@@ -33,9 +33,9 @@ describe('onApplicationStatusEvent', () => {
             sbi: '123456789',
             status: 'success',
             action: {
+              type: 'event-type',
               data: {
-                applicationStatus: 'AGREED',
-                remark: 'Remark'
+                statusId: 1
               },
               raisedOn: MOCK_NOW.toISOString(),
               raisedBy: 'business@email.com'
@@ -51,11 +51,14 @@ describe('onApplicationStatusEvent', () => {
           {
             PartitionKey: '123456789',
             RowKey: `123456789_${MOCK_NOW.getTime()}`,
+            EventId: 'eventID',
+            EventType: 'event-type',
             Status: 'success',
+            Payload: {
+              statusId: 1
+            },
             ChangedBy: 'business@email.com',
-            ChangedOn: MOCK_NOW.toISOString(),
-            Remark: 'Remark',
-            ApplicationStatus: 'AGREED'
+            ChangedOn: MOCK_NOW.toISOString()
           }
         ],
         consoleLogs: [
@@ -65,11 +68,14 @@ describe('onApplicationStatusEvent', () => {
           `${MOCK_NOW.toISOString()} 'application-status-event' created: ${JSON.stringify({
             PartitionKey: '123456789',
             RowKey: `123456789_${MOCK_NOW.getTime()}`,
+            EventId: 'eventID',
+            EventType: 'event-type',
             Status: 'success',
+            Payload: {
+              statusId: 1
+            },
             ChangedBy: 'business@email.com',
-            ChangedOn: MOCK_NOW.toISOString(),
-            ApplicationStatus: 'AGREED',
-            Remark: 'Remark'
+            ChangedOn: MOCK_NOW.toISOString()
           })}`,
           `${MOCK_NOW.toISOString()} 'application-status-event' has been saved successfully: ${JSON.stringify({
             partitionKey: '123456789',
@@ -91,9 +97,9 @@ describe('onApplicationStatusEvent', () => {
             sbi: '123456789',
             status: 'success',
             action: {
+              type: 'event-type',
               data: {
-                applicationStatus: 'AGREED',
-                remark: 'Remark'
+                statusId: 1
               },
               raisedOn: MOCK_NOW.toISOString(),
               raisedBy: 'business@email.com'
@@ -111,11 +117,14 @@ describe('onApplicationStatusEvent', () => {
           {
             PartitionKey: '123456789',
             RowKey: `eventID_${MOCK_NOW.getTime()}`,
+            EventId: 'eventID',
+            EventType: 'event-type',
             Status: 'duplicate event',
+            Payload: {
+              statusId: 1
+            },
             ChangedBy: 'business@email.com',
-            ChangedOn: MOCK_NOW.toISOString(),
-            Remark: 'Remark',
-            ApplicationStatus: 'AGREED'
+            ChangedOn: MOCK_NOW.toISOString()
           }
         ],
         consoleLogs: [
@@ -125,11 +134,14 @@ describe('onApplicationStatusEvent', () => {
           `${MOCK_NOW.toISOString()} 'application-status-event' created: ${JSON.stringify({
             PartitionKey: '123456789',
             RowKey: `eventID_${MOCK_NOW.getTime()}`,
+            EventId: 'eventID',
+            EventType: 'event-type',
             Status: 'duplicate event',
+            Payload: {
+              statusId: 1
+            },
             ChangedBy: 'business@email.com',
-            ChangedOn: MOCK_NOW.toISOString(),
-            ApplicationStatus: 'AGREED',
-            Remark: 'Remark'
+            ChangedOn: MOCK_NOW.toISOString()
           })}`,
           `${MOCK_NOW.toISOString()} 'application-status-event' has been saved successfully: ${JSON.stringify({
             partitionKey: '123456789',
