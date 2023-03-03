@@ -35,6 +35,7 @@ describe('onApplicationStatusEvent', () => {
             action: {
               type: 'event-type',
               data: {
+                reference: 'ref',
                 statusId: 1
               },
               raisedOn: MOCK_NOW.toISOString(),
@@ -49,12 +50,13 @@ describe('onApplicationStatusEvent', () => {
       expect: {
         applicationstatusBinding: [
           {
-            PartitionKey: '123456789',
-            RowKey: `123456789_${MOCK_NOW.getTime()}`,
+            PartitionKey: 'ref',
+            RowKey: `ref_${MOCK_NOW.getTime()}`,
             EventId: 'eventID',
             EventType: 'event-type',
             Status: 'success',
             Payload: {
+              reference: 'ref',
               statusId: 1
             },
             ChangedBy: 'business@email.com',
@@ -66,20 +68,21 @@ describe('onApplicationStatusEvent', () => {
             tableName: 'ffcahwrapplicationstatus'
           })}`,
           `${MOCK_NOW.toISOString()} 'application-status-event' created: ${JSON.stringify({
-            PartitionKey: '123456789',
-            RowKey: `123456789_${MOCK_NOW.getTime()}`,
+            PartitionKey: 'ref',
+            RowKey: `ref_${MOCK_NOW.getTime()}`,
             EventId: 'eventID',
             EventType: 'event-type',
             Status: 'success',
             Payload: {
+              reference: 'ref',
               statusId: 1
             },
             ChangedBy: 'business@email.com',
             ChangedOn: MOCK_NOW.toISOString()
           })}`,
           `${MOCK_NOW.toISOString()} 'application-status-event' has been saved successfully: ${JSON.stringify({
-            partitionKey: '123456789',
-            rowKey: `123456789_${MOCK_NOW.getTime()}`
+            partitionKey: 'ref',
+            rowKey: `ref_${MOCK_NOW.getTime()}`
           })}`
         ]
       }
@@ -99,6 +102,7 @@ describe('onApplicationStatusEvent', () => {
             action: {
               type: 'event-type',
               data: {
+                reference: 'ref',
                 statusId: 1
               },
               raisedOn: MOCK_NOW.toISOString(),
@@ -115,12 +119,13 @@ describe('onApplicationStatusEvent', () => {
       expect: {
         applicationstatusBinding: [
           {
-            PartitionKey: '123456789',
+            PartitionKey: 'ref',
             RowKey: `eventID_${MOCK_NOW.getTime()}`,
             EventId: 'eventID',
             EventType: 'event-type',
             Status: 'duplicate event',
             Payload: {
+              reference: 'ref',
               statusId: 1
             },
             ChangedBy: 'business@email.com',
@@ -132,19 +137,20 @@ describe('onApplicationStatusEvent', () => {
             tableName: 'ffcahwrapplicationstatus'
           })}`,
           `${MOCK_NOW.toISOString()} 'application-status-event' created: ${JSON.stringify({
-            PartitionKey: '123456789',
+            PartitionKey: 'ref',
             RowKey: `eventID_${MOCK_NOW.getTime()}`,
             EventId: 'eventID',
             EventType: 'event-type',
             Status: 'duplicate event',
             Payload: {
+              reference: 'ref',
               statusId: 1
             },
             ChangedBy: 'business@email.com',
             ChangedOn: MOCK_NOW.toISOString()
           })}`,
           `${MOCK_NOW.toISOString()} 'application-status-event' has been saved successfully: ${JSON.stringify({
-            partitionKey: '123456789',
+            partitionKey: 'ref',
             rowKey: `eventID_${MOCK_NOW.getTime()}`
           })}`
         ]

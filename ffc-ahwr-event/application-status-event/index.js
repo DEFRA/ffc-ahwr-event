@@ -1,7 +1,7 @@
 const queryEntities = require('../azure-storage/query-entities')
 
 const onApplicationStatusEvent = async (context, event) => {
-  const partitionKey = `${event.properties.sbi}`
+  const partitionKey = `${event.properties.action.data.reference}`
   let rowKey = `${partitionKey}_${new Date(event.properties.action.raisedOn).getTime()}`
   const checkIfDuplicate = await queryEntities(
     'ffcahwrapplicationstatus',
