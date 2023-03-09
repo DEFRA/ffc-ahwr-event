@@ -1,3 +1,7 @@
+const createTableClient = require('../azure-storage/create-table-client')
+
+const TABLE_NAME = 'monitoring'
+
 const saveMonitoring = async (context, event) => {
   const raisedEvent = event.properties
   const eventType = raisedEvent.action.type
@@ -19,6 +23,8 @@ const saveMonitoring = async (context, event) => {
     Payload: JSON.stringify(raisedEvent.action),
     Status: event.properties.status
   }
+
+  await createTableClient(TABLE_NAME).createTable()
 
   context.bindings.tableMonitoringBinding = []
   context.bindings.tableMonitoringBinding.push(eventMonitoringLog)

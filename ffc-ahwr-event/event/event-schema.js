@@ -14,7 +14,8 @@ const eventSchema = joi.object({
       message: joi.string().required(),
       data: joi.object(),
       raisedOn: joi.date().required(),
-      raisedBy: joi.string().required()
+      raisedBy: joi.string().required(),
+      timestamp: joi.string().optional()
     }).required()
   })
 })
