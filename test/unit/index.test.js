@@ -10,6 +10,9 @@ const mockProtectiveMonitoringEvent = require('../../ffc-ahwr-event/monitoring/p
 jest.mock('../../ffc-ahwr-event/application-status-event')
 const onApplicationStatusEvent = require('../../ffc-ahwr-event/application-status-event')
 
+jest.mock('../../ffc-ahwr-event/register-your-interest-event')
+const onRegisterYourInterestEvent = require('../../ffc-ahwr-event/register-your-interest-event')
+
 const processEvent = require('../../ffc-ahwr-event/index')
 const mockContext = require('../mock/mock-context')
 
@@ -84,6 +87,19 @@ describe('index function', () => {
 
       expect(onApplicationStatusEvent).toHaveBeenCalledTimes(1)
       expect(onApplicationStatusEvent).toHaveBeenCalledWith(mockContext, message)
+      expect(mockMonitoringEvent.saveMonitoring).toHaveBeenCalledTimes(0)
+      expect(mockProtectiveMonitoringEvent.saveMonitoringEvent).toHaveBeenCalledTimes(0)
+    })
+  })
+
+  describe('register-your-interest-event', () => {
+    test('receives message from service bus', async () => {
+      message.name = 'register-your-interest-event'
+
+      await processEvent(mockContext, message)
+
+      expect(onRegisterYourInterestEvent).toHaveBeenCalledTimes(1)
+      expect(onRegisterYourInterestEvent).toHaveBeenCalledWith(mockContext, message)
       expect(mockMonitoringEvent.saveMonitoring).toHaveBeenCalledTimes(0)
       expect(mockProtectiveMonitoringEvent.saveMonitoringEvent).toHaveBeenCalledTimes(0)
     })
