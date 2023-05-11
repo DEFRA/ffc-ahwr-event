@@ -14,6 +14,15 @@ describe('onApplicationStatusEvent', () => {
     jest.useRealTimers()
   })
 
+  beforeEach(() => {
+    jest.mock('@azure/identity', () => {
+      return {
+        DefaultAzureCredential: jest.fn().mockImplementation(() => {
+        })
+      }
+    })
+  })
+
   afterEach(() => {
     jest.clearAllMocks()
     jest.resetModules()
