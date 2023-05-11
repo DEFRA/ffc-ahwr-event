@@ -177,7 +177,12 @@ describe('onRegisterYourInterestEvent', () => {
   ])('%s', async (testCase) => {
     const MOCK_ENTITIES = testCase.when.entities
 
-    jest.mock('@azure/identity')
+    jest.mock('@azure/identity', () => {
+      return {
+        DefaultAzureCredential: jest.fn().mockImplementation(() => {
+        })
+      }
+    })
     jest.mock('@azure/data-tables', () => {
       return {
         odata: jest.fn(),
