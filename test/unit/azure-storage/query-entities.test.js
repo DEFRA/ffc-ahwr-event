@@ -2,6 +2,12 @@ describe('storage function', () => {
   let queryEntities
 
   beforeAll(() => {
+    jest.mock('@azure/identity', () => {
+      return {
+        DefaultAzureCredential: jest.fn().mockImplementation(() => {
+        })
+      }
+    })
     jest.mock('@azure/data-tables', () => {
       return {
         odata: jest.fn(),
