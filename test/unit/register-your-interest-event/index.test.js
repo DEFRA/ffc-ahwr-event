@@ -1,5 +1,12 @@
 const MOCK_NOW = new Date()
 
+jest.mock('@azure/identity', () => {
+  return {
+    DefaultAzureCredential: jest.fn().mockImplementation(() => {
+    })
+  }
+})
+
 describe('onRegisterYourInterestEvent', () => {
   let logSpy
 
@@ -12,11 +19,11 @@ describe('onRegisterYourInterestEvent', () => {
 
   afterAll(() => {
     jest.useRealTimers()
+    jest.resetModules()
   })
 
-  afterEach(() => {
+  afterAll(() => {
     jest.clearAllMocks()
-    jest.resetModules()
   })
 
   test.each([
@@ -177,12 +184,6 @@ describe('onRegisterYourInterestEvent', () => {
   ])('%s', async (testCase) => {
     const MOCK_ENTITIES = testCase.when.entities
 
-    jest.mock('@azure/identity', () => {
-      return {
-        DefaultAzureCredential: jest.fn().mockImplementation(() => {
-        })
-      }
-    })
     jest.mock('@azure/data-tables', () => {
       return {
         odata: jest.fn(),
