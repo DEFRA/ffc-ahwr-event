@@ -1,12 +1,5 @@
 const MOCK_NOW = new Date()
 
-jest.mock('@azure/identity', () => {
-  return {
-    DefaultAzureCredential: jest.fn().mockImplementation(() => {
-    })
-  }
-})
-
 describe('onRegisterYourInterestEvent', () => {
   let logSpy
 
@@ -19,11 +12,20 @@ describe('onRegisterYourInterestEvent', () => {
 
   afterAll(() => {
     jest.useRealTimers()
-    jest.resetModules()
   })
 
-  afterAll(() => {
+  beforeEach(() => {
+    jest.mock('@azure/identity', () => {
+      return {
+        DefaultAzureCredential: jest.fn().mockImplementation(() => {
+        })
+      }
+    })
+  })
+
+  afterEach(() => {
     jest.clearAllMocks()
+    jest.resetModules()
   })
 
   test.each([
