@@ -29,6 +29,13 @@
       "direction": "out"
     },
     {
+      "tableName": "ffcahwrexception",
+      "connection": "TableConnectionString",
+      "name": "exceptionBinding",
+      "type": "table",
+      "direction": "out"
+    },
+    {
       "tableName": "monitoring",
       "connection": "TableConnectionString",
       "name": "tableMonitoringBinding",
