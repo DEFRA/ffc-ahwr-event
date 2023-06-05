@@ -13,8 +13,8 @@ const onApplicationStatusEvent = require('../../ffc-ahwr-event/application-statu
 jest.mock('../../ffc-ahwr-event/register-your-interest-event')
 const onRegisterYourInterestEvent = require('../../ffc-ahwr-event/register-your-interest-event')
 
-jest.mock('../../ffc-ahwr-event/exception-event')
-const onExceptionEvent = require('../../ffc-ahwr-event/ineligibility-event')
+jest.mock('../../ffc-ahwr-event/ineligibility-event')
+const onIneligibilityEvent = require('../../ffc-ahwr-event/ineligibility-event')
 
 const processEvent = require('../../ffc-ahwr-event/index')
 const mockContext = require('../mock/mock-context')
@@ -110,12 +110,12 @@ describe('index function', () => {
 
   describe('send-exception-event', () => {
     test('receives message from service bus', async () => {
-      message.name = 'send-exception-event'
+      message.name = 'send-ineligibility-event'
 
       await processEvent(mockContext, message)
 
-      expect(onExceptionEvent).toHaveBeenCalledTimes(1)
-      expect(onExceptionEvent).toHaveBeenCalledWith(mockContext, message)
+      expect(onIneligibilityEvent).toHaveBeenCalledTimes(1)
+      expect(onIneligibilityEvent).toHaveBeenCalledWith(mockContext, message)
       expect(mockMonitoringEvent.saveMonitoring).toHaveBeenCalledTimes(0)
       expect(mockProtectiveMonitoringEvent.saveMonitoringEvent).toHaveBeenCalledTimes(0)
     })
