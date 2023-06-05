@@ -1,10 +1,10 @@
 const queryEntities = require('../azure-storage/query-entities')
 
-const onExceptionEvent = async (context, event) => {
+const onIneligibilityEvent = async (context, event) => {
   const partitionKey = `${event.properties.action.data.sbi}`
   let rowKey = `${partitionKey}_${new Date(event.properties.action.raisedOn).getTime()}`
   const checkIfDuplicate = await queryEntities(
-    'ffcahwrexception',
+    'ffcahwrineligibility',
     partitionKey,
     rowKey
   )
@@ -12,7 +12,7 @@ const onExceptionEvent = async (context, event) => {
     rowKey = `${event.properties.id}_${new Date().getTime()}`
     event.properties.status = 'duplicate event'
   }
-  const exceptionEvent = {
+  const ineligibilityEvent = {
     PartitionKey: partitionKey,
     RowKey: rowKey,
     EventId: event.properties.id,
@@ -22,15 +22,15 @@ const onExceptionEvent = async (context, event) => {
     ChangedBy: event.properties.action.raisedBy,
     ChangedOn: event.properties.action.raisedOn
   }
-  console.log(`${new Date().toISOString()} 'exception-event' created: ${JSON.stringify(
-    exceptionEvent
+  console.log(`${new Date().toISOString()} 'ineligibility-event' created: ${JSON.stringify(
+    ineligibilityEvent
   )}`)
-  context.bindings.exceptionBinding = []
-  context.bindings.exceptionBinding.push(exceptionEvent)
-  console.log(`${new Date().toISOString()} 'exception-event' has been saved successfully: ${JSON.stringify({
+  context.bindings.ineligibilityBinding = []
+  context.bindings.ineligibilityBinding.push(ineligibilityEvent)
+  console.log(`${new Date().toISOString()} 'ineligibility-event' has been saved successfully: ${JSON.stringify({
     partitionKey,
     rowKey
   })}`)
 }
 
-module.exports = onExceptionEvent
+module.exports = onIneligibilityEvent

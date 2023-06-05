@@ -14,7 +14,7 @@ jest.mock('../../ffc-ahwr-event/register-your-interest-event')
 const onRegisterYourInterestEvent = require('../../ffc-ahwr-event/register-your-interest-event')
 
 jest.mock('../../ffc-ahwr-event/exception-event')
-const onExceptionEvent = require('../../ffc-ahwr-event/exception-event')
+const onExceptionEvent = require('../../ffc-ahwr-event/ineligibility-event')
 
 const processEvent = require('../../ffc-ahwr-event/index')
 const mockContext = require('../mock/mock-context')
