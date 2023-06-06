@@ -31,7 +31,7 @@
     {
       "tableName": "ffcahwrineligibility",
       "connection": "TableConnectionString",
-      "name": "exceptionBinding",
+      "name": "ineligibilityBinding",
       "type": "table",
       "direction": "out"
     },
