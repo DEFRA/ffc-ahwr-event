@@ -1,17 +1,17 @@
 {
-  "IsEncrypted": false,
-  "Values": {
-    "FUNCTIONS_WORKER_RUNTIME": "node",
-    "AzureWebJobsStorage": "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10001/devstoreaccount1;QueueEndpoint=http://127.0.0.1:10002/devstoreaccount1;",
-    "ServiceBusConnectionString": "",
-    "TableConnectionString": "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;TableEndpoint=http://127.0.0.1:10003/devstoreaccount1",
-    "AZURE_STORAGE_USE_CONNECTION_STRING": "true",
-    "AZURE_STORAGE_ACCOUNT_NAME": "devstoreaccount1",
-    "AZURE_STORAGE_TABLE": "ahwreventstore",
-    "AHWR_EVENT_QUEUE": "ffc-ahwr-event",
-    "MONITORING_APPLICATION": "ffc-ahwr",
-    "PMC_CODE": "code",
-    "MONITORING_URL": "",
-    "MONITORING_ENABLED": false
-  }
+    "IsEncrypted": false,
+    "Values": {
+        "FUNCTIONS_WORKER_RUNTIME": "node",
+        "AzureWebJobsStorage": "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10001/devstoreaccount1;QueueEndpoint=http://127.0.0.1:10002/devstoreaccount1;",
+        "ServiceBusConnectionString": "",
+        "TableConnectionString": "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;TableEndpoint=http://127.0.0.1:10003/devstoreaccount1",
+        "AZURE_STORAGE_USE_CONNECTION_STRING": "true",
+        "AZURE_STORAGE_ACCOUNT_NAME": "devstoreaccount1",
+        "AZURE_STORAGE_TABLE": "ahwreventstore",
+        "AHWR_EVENT_QUEUE": "ffc-ahwr-event",
+        "MONITORING_APPLICATION": "ffc-ahwr",
+        "PMC_CODE": "code",
+        "MONITORING_URL": "",
+        "MONITORING_ENABLED": false
+    }
 }

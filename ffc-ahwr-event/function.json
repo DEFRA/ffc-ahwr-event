@@ -29,6 +29,13 @@
       "direction": "out"
     },
     {
+      "tableName": "ffcahwrineligibility",
+      "connection": "TableConnectionString",
+      "name": "ineligibilityBinding",
+      "type": "table",
+      "direction": "out"
+    },
+    {
       "tableName": "monitoring",
       "connection": "TableConnectionString",
       "name": "tableMonitoringBinding",
