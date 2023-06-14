@@ -15,12 +15,12 @@ describe('Monitoring function', () => {
       properties: {
         id: '13345',
         action: {
-          type: 'blah',
+          type: 'action',
           raisedOn: Date.now(),
-          raisedBy: 'SOmeone'
+          raisedBy: 'user'
 
         },
-        status: 'some status'
+        status: 'status'
       }
 
     }
