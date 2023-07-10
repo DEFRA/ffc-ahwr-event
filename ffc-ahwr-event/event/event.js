@@ -10,7 +10,7 @@ const saveEvent = async (context, event) => {
   const eventRaisedBy = raisedEvent.action.raisedBy
   const timespan = new Date(raisedEvent.action.raisedOn).getTime()
 
-  const partitionKey = `${sbi}_${eventRaised.toISOString()}`
+  const partitionKey = `${sbi}`
   let rowKey = `${partitionKey}_${timespan}`
   const sessionId = raisedEvent.id.toString()
 
