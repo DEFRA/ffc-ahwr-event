@@ -22,20 +22,6 @@
       "direction": "out"
     },
     {
-      "tableName": "ffcahwrregisteryourinterest",
-      "connection": "TableConnectionString",
-      "name": "registeryourinterestBinding",
-      "type": "table",
-      "direction": "out"
-    },
-    {
-      "tableName": "ffcahwrineligibility",
-      "connection": "TableConnectionString",
-      "name": "ineligibilityBinding",
-      "type": "table",
-      "direction": "out"
-    },
-    {
       "tableName": "monitoring",
       "connection": "TableConnectionString",
       "name": "tableMonitoringBinding",
