@@ -15,7 +15,7 @@ module.exports = async function (context, message) {
     }
   } else if (event.name === 'application-status-event') {
     await onApplicationStatusEvent(context, event)
-  } else if (event.name === 'send-ineligibility-event') {	
+  } else if (event.name === 'send-ineligibility-event') {
     await onIneligibilityEvent(context, event)
   } else {
     await saveMonitoring(context, event)
