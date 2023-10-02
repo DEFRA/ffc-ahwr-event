@@ -10,6 +10,9 @@ const mockProtectiveMonitoringEvent = require('../../ffc-ahwr-event/monitoring/p
 jest.mock('../../ffc-ahwr-event/application-status-event')
 const onApplicationStatusEvent = require('../../ffc-ahwr-event/application-status-event')
 
+jest.mock('../../ffc-ahwr-event/ineligibility-event')	
+const onIneligibilityEvent = require('../../ffc-ahwr-event/ineligibility-event')
+
 const processEvent = require('../../ffc-ahwr-event/index')
 const mockContext = require('../mock/mock-context')
 
@@ -88,4 +91,17 @@ describe('index function', () => {
       expect(mockProtectiveMonitoringEvent.saveMonitoringEvent).toHaveBeenCalledTimes(0)
     })
   })
+})
+
+describe('send-exception-event', () => {	
+  test('receives message from service bus', async () => {	
+    message.name = 'send-ineligibility-event'	
+
+    await processEvent(mockContext, message)	
+
+    expect(onIneligibilityEvent).toHaveBeenCalledTimes(1)	
+    expect(onIneligibilityEvent).toHaveBeenCalledWith(mockContext, message)	
+    expect(mockMonitoringEvent.saveMonitoring).toHaveBeenCalledTimes(0)	
+    expect(mockProtectiveMonitoringEvent.saveMonitoringEvent).toHaveBeenCalledTimes(0)	
+  })	
 })
