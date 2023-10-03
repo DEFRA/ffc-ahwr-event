@@ -19,7 +19,7 @@
     "@azure/data-tables": "^13.2.0",
     "@azure/identity": "^3.1.2",
     "ffc-protective-monitoring": "^1.0.4",
-    "joi": "17.6.4"
+    "joi": "17.10.1"
   },
   "overrides": {
     "fast-xml-parser": "4.3.1"
