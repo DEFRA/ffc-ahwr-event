@@ -9,6 +9,7 @@ const eventSchema = joi.object({
     checkpoint: joi.string().required(),
     status: joi.string().required(),
     ip: joi.string().optional(),
+    reference: joi.string().optional(),
     action: joi.object({
       type: joi.string().required(),
       message: joi.string().required(),
