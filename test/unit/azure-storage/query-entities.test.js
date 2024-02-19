@@ -16,9 +16,9 @@ describe('storage function', () => {
             createTable: jest.fn(),
             listEntities: jest.fn().mockImplementation(() => {
               return [
-                { PartitionKey: '123', RowKey: '456', event: 'event1' },
-                { PartitionKey: '123', RowKey: '789', event: 'event2' },
-                { PartitionKey: '123', RowKey: '101112', event: 'event3' }
+                { PartitionKey: '123', RowKey: '456', eventType: 'event1' },
+                { PartitionKey: '123', RowKey: '789', eventType: 'event2' },
+                { PartitionKey: '123', RowKey: '101112', eventType: 'event3' }
               ]
             })
           }
@@ -41,7 +41,8 @@ describe('storage function', () => {
     const tableName = 'table_name'
     const partitionKey = '123'
     const rowKey = '123_456'
-    const events = await queryEntities(tableName, partitionKey, rowKey)
+    const eventType = 'event1'
+    const events = await queryEntities(tableName, partitionKey, rowKey, eventType)
     expect(events.length).toEqual(3)
   })
 
