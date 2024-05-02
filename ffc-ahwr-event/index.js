@@ -13,6 +13,10 @@ module.exports = async function (context, message) {
     if (validateEvent(event)) {
       await saveEvent(context, event)
     }
+  } else if (event.name === 'send-invalid-data-event') {
+    if (validateEvent(event)) {
+      await saveEvent(context, event)
+    }
   } else if (event.name === 'application-status-event') {
     await onApplicationStatusEvent(context, event)
   } else if (event.name === 'send-ineligibility-event') {

@@ -16,7 +16,7 @@ const saveEvent = async (context, event) => {
 
   const checkIfEntityExists = await queryEntities(tableName, partitionKey, rowKey, eventType)
 
-  if (checkIfEntityExists.length > 0) {
+  if (checkIfEntityExists.length > 0 && event.name === 'send-session-event') {
     rowKey = `${raisedEvent.id}_${new Date().getTime()}`
     event.properties.status = 'duplicate event'
   }
