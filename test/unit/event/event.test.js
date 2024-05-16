@@ -38,12 +38,12 @@ describe('Event function', () => {
 
   test('Duplicated event found NOT created if name is not send-session-event', async () => {
     queryEntities.mockResolvedValue([{ test: 'test' }])
-    await saveEvent(mockContext, {...message, name: 'some-other-event'})
+    await saveEvent(mockContext, { ...message, name: 'some-other-event' })
     expect(queryEntities).toHaveBeenCalledTimes(1)
     expect(mockContext.bindings).toHaveProperty('tableBinding')
     expect(mockContext.bindings.tableBinding[0].Status).toEqual('in progress')
   })
-  
+
   test('Duplicated event found created', async () => {
     queryEntities.mockResolvedValue([{ test: 'test' }])
     await saveEvent(mockContext, message)
