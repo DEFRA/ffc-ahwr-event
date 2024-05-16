@@ -9,22 +9,23 @@ module.exports = async function (context, message) {
   const event = message
   context.log.info(`Received event: ${JSON.stringify(event)}`)
 
-  if (event.name === 'send-session-event') {
-    if (validateEvent(event)) {
-      await saveEvent(context, event)
-    }
-  } else if (event.name === 'send-invalid-data-event') {
-    if (validateEvent(event)) {
-      await saveEvent(context, event)
-    }
-  } else if (event.name === 'application-status-event') {
-    await onApplicationStatusEvent(context, event)
-  } else if (event.name === 'send-ineligibility-event') {
-    await onIneligibilityEvent(context, event)
-  } else {
-    await saveMonitoring(context, event)
-    if (process.env.MONITORING_ENABLED) {
-      await saveMonitoringEvent(context, event)
-    }
+  switch (event.name) {
+    case 'send-session-event':
+    case 'send-invalid-data-event':
+      if (validateEvent(event)) {
+        await saveEvent(context, event)
+      }
+      break
+    case 'application-status-event':
+      await onApplicationStatusEvent(context, event)
+      break
+    case 'send-ineligibility-event':
+      await onIneligibilityEvent(context, event)
+      break
+    default:
+      await saveMonitoring(context, event)
+      if (process.env.MONITORING_ENABLED) {
+        await saveMonitoringEvent(context, event)
+      }
   }
 }
