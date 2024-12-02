@@ -58,4 +58,13 @@ describe('Event function', () => {
     expect(queryEntities).toHaveBeenCalledTimes(1)
     expect(mockContext.bindings).toHaveProperty('tableBinding')
   })
+
+  test('rowKey is constructed correctly', async () => {
+    queryEntities.mockResolvedValue([])
+    await saveEvent(mockContext, message)
+    const raisedOn = new Date(message.properties.action.raisedOn).getTime()
+    const expectedRowKey = `${message.properties.sbi}_${raisedOn}_${message.properties.action.type}`
+    expect(queryEntities).toHaveBeenCalledTimes(1)
+    expect(mockContext.bindings.tableBinding[0].RowKey).toBe(expectedRowKey)
+  })
 })

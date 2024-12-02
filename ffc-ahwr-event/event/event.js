@@ -11,7 +11,7 @@ const saveEvent = async (context, event) => {
   const timespan = new Date(raisedEvent.action.raisedOn).getTime()
 
   const partitionKey = `${sbi}`
-  let rowKey = `${partitionKey}_${timespan}`
+  let rowKey = `${partitionKey}_${timespan}_${eventType}`
   const sessionId = raisedEvent.id.toString()
 
   const checkIfEntityExists = await queryEntities(tableName, partitionKey, rowKey, eventType)
