@@ -1,5 +1,4 @@
 const queryEntities = require('../azure-storage/query-entities')
-const { buildRowKey } = require('./event-util')
 
 const tableName = process.env.AZURE_STORAGE_TABLE
 
@@ -12,7 +11,7 @@ const saveEvent = async (context, event) => {
   const timespan = new Date(raisedEvent.action.raisedOn).getTime()
 
   const partitionKey = `${sbi}`
-  let rowKey = buildRowKey(partitionKey, timespan, eventType)
+  let rowKey = `${partitionKey}_${timespan}_${eventType}`
   const sessionId = raisedEvent.id.toString()
 
   const checkIfEntityExists = await queryEntities(tableName, partitionKey, rowKey, eventType)
