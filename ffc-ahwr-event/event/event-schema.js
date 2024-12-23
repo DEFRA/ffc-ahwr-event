@@ -21,7 +21,7 @@ const eventSchema = joi.object({
   })
 })
 
-const validateEvent = (event) => {
+export const validateEvent = (event) => {
   const validate = eventSchema.validate(event)
 
   if (validate.error) {
@@ -31,5 +31,3 @@ const validateEvent = (event) => {
 
   return true
 }
-
-module.exports = { validateEvent }

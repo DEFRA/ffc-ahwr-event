@@ -1,7 +1,11 @@
+import { createTableClient } from '../../../ffc-ahwr-event/azure-storage/create-table-client'
+import { saveMonitoring } from '../../../ffc-ahwr-event/monitoring/monitoring'
+
+jest.mock('../../../ffc-ahwr-event/azure-storage/create-table-client')
+
 describe('Monitoring function', () => {
-  const mockCreateTableClient = require('../../../ffc-ahwr-event/azure-storage/create-table-client')
-  jest.mock('../../../ffc-ahwr-event/azure-storage/create-table-client')
   const mockLogInfo = jest.fn()
+
   test('saveMonitoring', async () => {
     const context = {
       bindings: {
@@ -25,14 +29,16 @@ describe('Monitoring function', () => {
 
     }
     const mockCreateTable = jest.fn()
-    mockCreateTableClient.mockImplementationOnce(() => {
+
+    createTableClient.mockImplementationOnce(() => {
       return {
         createTable: mockCreateTable
       }
     })
-    const monitoring = require('../../../ffc-ahwr-event/monitoring/monitoring')
-    await monitoring.saveMonitoring(context, event)
-    expect(mockCreateTableClient).toHaveBeenCalledTimes(1)
+
+    await saveMonitoring(context, event)
+
+    expect(createTableClient).toHaveBeenCalledTimes(1)
     expect(mockCreateTable).toHaveBeenCalledTimes(1)
     expect(mockLogInfo).toHaveBeenCalledTimes(1)
   })

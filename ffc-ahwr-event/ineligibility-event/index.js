@@ -1,6 +1,6 @@
-const queryEntities = require('../azure-storage/query-entities')
+import { queryEntities } from '../azure-storage/query-entities'
 
-const onIneligibilityEvent = async (context, event) => {
+export const onIneligibilityEvent = async (context, event) => {
   const partitionKey = `${event.properties.action.data.sbi}`
   let rowKey = `${partitionKey}_${new Date(event.properties.action.raisedOn).getTime()}`
   const eventType = event.properties.action.type
@@ -34,5 +34,3 @@ const onIneligibilityEvent = async (context, event) => {
     rowKey
   })}`)
 }
-
-module.exports = onIneligibilityEvent

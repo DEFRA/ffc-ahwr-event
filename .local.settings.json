@@ -12,6 +12,6 @@
         "MONITORING_APPLICATION": "ffc-ahwr",
         "PMC_CODE": "code",
         "MONITORING_URL": "",
-        "MONITORING_ENABLED": false
+        "MONITORING_ENABLED": "false"
     }
 }

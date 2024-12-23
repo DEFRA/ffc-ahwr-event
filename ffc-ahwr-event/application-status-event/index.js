@@ -1,6 +1,6 @@
-const queryEntities = require('../azure-storage/query-entities')
+import { queryEntities } from '../azure-storage/query-entities'
 
-const onApplicationStatusEvent = async (context, event) => {
+export const onApplicationStatusEvent = async (context, event) => {
   const partitionKey = `${event.properties.action.data.reference}`
   let rowKey = `${partitionKey}_${new Date(event.properties.action.raisedOn).getTime()}`
   const eventType = event.properties.action.type
@@ -34,5 +34,3 @@ const onApplicationStatusEvent = async (context, event) => {
     rowKey
   })}`)
 }
-
-module.exports = onApplicationStatusEvent
