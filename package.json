@@ -50,5 +50,12 @@
       "beforeAll",
       "afterAll"
     ]
+  },
+  "babel": {
+    "env": {
+      "development": {
+        "plugins": ["@babel/plugin-transform-modules-commonjs"]
+      }
+    }
   }
 }
