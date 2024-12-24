@@ -1,6 +1,6 @@
 module.exports = {
   collectCoverage: true,
-  collectCoverageFrom: ['**/*.js', '!**/*.test.js'],
+  collectCoverageFrom: ['**/*.mjs', '!**/*.test.mjs'],
   coverageDirectory: 'test-output',
   coverageReporters: ['text-summary', 'lcov'],
   coveragePathIgnorePatterns: [
@@ -26,6 +26,7 @@ module.exports = {
   setupFilesAfterEnv: ['./jest.setup.js'],
   verbose: false,
   transform: {
-    '^.+\\.[t|j]sx?$': 'babel-jest'
+    '^.+\\.jsx?$': 'babel-jest',
+    '^.+\\.mjs$': 'babel-jest'
   }
 }
