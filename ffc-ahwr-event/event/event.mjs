@@ -1,8 +1,7 @@
-const queryEntities = require('../azure-storage/query-entities')
+import { queryEntities } from '../azure-storage/query-entities.mjs'
 
-const tableName = process.env.AZURE_STORAGE_TABLE
-
-const saveEvent = async (context, event) => {
+export const saveEvent = async (context, event) => {
+  const tableName = process.env.AZURE_STORAGE_TABLE
   const raisedEvent = event.properties
   const eventType = raisedEvent.action.type
   const sbi = raisedEvent.sbi
@@ -37,5 +36,3 @@ const saveEvent = async (context, event) => {
 
   context.log.info(`Event saved successfully: partitionKey: ${partitionKey}, rowKey: ${rowKey}`)
 }
-
-module.exports = { saveEvent }

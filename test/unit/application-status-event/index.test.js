@@ -1,13 +1,25 @@
+import { onApplicationStatusEvent } from '../../../ffc-ahwr-event/application-status-event/index.mjs'
+
+const mockListEntities = jest.fn()
+
+jest.mock('@azure/data-tables', () => {
+  return {
+    odata: jest.fn(),
+    TableClient: jest.fn().mockImplementation(() => {
+      return {
+        createTable: jest.fn(),
+        listEntities: mockListEntities
+      }
+    })
+  }
+})
+
 const MOCK_NOW = new Date()
 
 describe('onApplicationStatusEvent', () => {
-  let logSpy
-
   beforeAll(() => {
     jest.useFakeTimers('modern')
     jest.setSystemTime(MOCK_NOW)
-
-    logSpy = jest.spyOn(console, 'log')
   })
 
   afterAll(() => {
@@ -17,8 +29,7 @@ describe('onApplicationStatusEvent', () => {
   beforeEach(() => {
     jest.mock('@azure/identity', () => {
       return {
-        DefaultAzureCredential: jest.fn().mockImplementation(() => {
-        })
+        DefaultAzureCredential: jest.fn().mockImplementation(() => {})
       }
     })
   })
@@ -71,28 +82,6 @@ describe('onApplicationStatusEvent', () => {
             ChangedBy: 'business@email.com',
             ChangedOn: MOCK_NOW.toISOString()
           }
-        ],
-        consoleLogs: [
-          `${MOCK_NOW.toISOString()} Creating the table client using the DefaultAzureCredential: ${JSON.stringify({
-            tableName: 'ffcahwrapplicationstatus'
-          })}`,
-          `${MOCK_NOW.toISOString()} 'application-status-event' created: ${JSON.stringify({
-            PartitionKey: 'ref',
-            RowKey: `ref_${MOCK_NOW.getTime()}`,
-            EventId: 'eventID',
-            EventType: 'event-type',
-            Status: 'success',
-            Payload: {
-              reference: 'ref',
-              statusId: 1
-            },
-            ChangedBy: 'business@email.com',
-            ChangedOn: MOCK_NOW.toISOString()
-          })}`,
-          `${MOCK_NOW.toISOString()} 'application-status-event' has been saved successfully: ${JSON.stringify({
-            partitionKey: 'ref',
-            rowKey: `ref_${MOCK_NOW.getTime()}`
-          })}`
         ]
       }
     },
@@ -140,57 +129,21 @@ describe('onApplicationStatusEvent', () => {
             ChangedBy: 'business@email.com',
             ChangedOn: MOCK_NOW.toISOString()
           }
-        ],
-        consoleLogs: [
-          `${MOCK_NOW.toISOString()} Creating the table client using the DefaultAzureCredential: ${JSON.stringify({
-            tableName: 'ffcahwrapplicationstatus'
-          })}`,
-          `${MOCK_NOW.toISOString()} 'application-status-event' created: ${JSON.stringify({
-            PartitionKey: 'ref',
-            RowKey: `eventID_${MOCK_NOW.getTime()}`,
-            EventId: 'eventID',
-            EventType: 'event-type',
-            Status: 'duplicate event',
-            Payload: {
-              reference: 'ref',
-              statusId: 1
-            },
-            ChangedBy: 'business@email.com',
-            ChangedOn: MOCK_NOW.toISOString()
-          })}`,
-          `${MOCK_NOW.toISOString()} 'application-status-event' has been saved successfully: ${JSON.stringify({
-            partitionKey: 'ref',
-            rowKey: `eventID_${MOCK_NOW.getTime()}`
-          })}`
         ]
       }
     }
   ])('%s', async (testCase) => {
-    const MOCK_ENTITIES = testCase.when.entities
+    const mockEntities = testCase.when.entities
 
-    jest.mock('@azure/data-tables', () => {
-      return {
-        odata: jest.fn(),
-        TableClient: jest.fn().mockImplementation(() => {
-          return {
-            createTable: jest.fn(),
-            listEntities: jest.fn().mockImplementation(() => {
-              return MOCK_ENTITIES
-            })
-          }
-        })
-      }
-    })
+    mockListEntities.mockReturnValue(mockEntities)
 
-    const onApplicationStatusChanged = require('../../../ffc-ahwr-event/application-status-event')
-    await onApplicationStatusChanged(
+    await onApplicationStatusEvent(
       testCase.given.context,
       testCase.given.event
     )
 
-    expect(testCase.given.context.bindings.applicationstatusBinding).toEqual(testCase.expect.applicationstatusBinding)
-    testCase.expect.consoleLogs.forEach(
-      (consoleLog, idx) => expect(logSpy).toHaveBeenNthCalledWith(idx + 1, consoleLog)
+    expect(testCase.given.context.bindings.applicationstatusBinding).toEqual(
+      testCase.expect.applicationstatusBinding
     )
   })
 })

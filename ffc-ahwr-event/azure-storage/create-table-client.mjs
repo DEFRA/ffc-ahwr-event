@@ -1,7 +1,7 @@
-const { DefaultAzureCredential } = require('@azure/identity')
-const { TableClient } = require('@azure/data-tables')
+import { DefaultAzureCredential } from '@azure/identity'
+import { TableClient } from '@azure/data-tables'
 
-const createTableClient = (tableName) => {
+export const createTableClient = (tableName) => {
   if (process.env.AZURE_STORAGE_USE_CONNECTION_STRING) {
     console.log(`${new Date().toISOString()} Creating the table client using the connection string: ${JSON.stringify({
       connectionString: process.env.TableConnectionString,
@@ -26,5 +26,3 @@ const createTableClient = (tableName) => {
     )
   }
 }
-
-module.exports = createTableClient

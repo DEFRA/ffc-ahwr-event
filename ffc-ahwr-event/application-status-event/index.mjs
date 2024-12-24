@@ -1,11 +1,11 @@
-const queryEntities = require('../azure-storage/query-entities')
+import { queryEntities } from '../azure-storage/query-entities.mjs'
 
-const onIneligibilityEvent = async (context, event) => {
-  const partitionKey = `${event.properties.action.data.sbi}`
+export const onApplicationStatusEvent = async (context, event) => {
+  const partitionKey = `${event.properties.action.data.reference}`
   let rowKey = `${partitionKey}_${new Date(event.properties.action.raisedOn).getTime()}`
   const eventType = event.properties.action.type
   const checkIfDuplicate = await queryEntities(
-    'ffcahwrineligibility',
+    'ffcahwrapplicationstatus',
     partitionKey,
     rowKey,
     eventType
@@ -14,7 +14,7 @@ const onIneligibilityEvent = async (context, event) => {
     rowKey = `${event.properties.id}_${new Date().getTime()}`
     event.properties.status = 'duplicate event'
   }
-  const ineligibilityEvent = {
+  const applicationStatusEvent = {
     PartitionKey: partitionKey,
     RowKey: rowKey,
     EventId: event.properties.id,
@@ -24,15 +24,13 @@ const onIneligibilityEvent = async (context, event) => {
     ChangedBy: event.properties.action.raisedBy,
     ChangedOn: event.properties.action.raisedOn
   }
-  console.log(`${new Date().toISOString()} 'ineligibility-event' created: ${JSON.stringify(
-    ineligibilityEvent
+  console.log(`${new Date().toISOString()} 'application-status-event' created: ${JSON.stringify(
+    applicationStatusEvent
   )}`)
-  context.bindings.ineligibilityBinding = []
-  context.bindings.ineligibilityBinding.push(ineligibilityEvent)
-  console.log(`${new Date().toISOString()} 'ineligibility-event' has been saved successfully: ${JSON.stringify({
+  context.bindings.applicationstatusBinding = []
+  context.bindings.applicationstatusBinding.push(applicationStatusEvent)
+  console.log(`${new Date().toISOString()} 'application-status-event' has been saved successfully: ${JSON.stringify({
     partitionKey,
     rowKey
   })}`)
 }
-
-module.exports = onIneligibilityEvent

@@ -1,3 +1,19 @@
+import { onIneligibilityEvent } from '../../../ffc-ahwr-event/ineligibility-event/index.mjs'
+
+const mockListEntities = jest.fn()
+
+jest.mock('@azure/data-tables', () => {
+  return {
+    odata: jest.fn(),
+    TableClient: jest.fn().mockImplementation(() => {
+      return {
+        createTable: jest.fn(),
+        listEntities: mockListEntities
+      }
+    })
+  }
+})
+
 const MOCK_NOW = new Date()
 
 describe('onIneligibilityEvent', () => {
@@ -166,23 +182,10 @@ describe('onIneligibilityEvent', () => {
       }
     }
   ])('%s', async (testCase) => {
-    const MOCK_ENTITIES = testCase.when.entities
+    const mockEntities = testCase.when.entities
 
-    jest.mock('@azure/data-tables', () => {
-      return {
-        odata: jest.fn(),
-        TableClient: jest.fn().mockImplementation(() => {
-          return {
-            createTable: jest.fn(),
-            listEntities: jest.fn().mockImplementation(() => {
-              return MOCK_ENTITIES
-            })
-          }
-        })
-      }
-    })
+    mockListEntities.mockReturnValueOnce(mockEntities)
 
-    const onIneligibilityEvent = require('../../../ffc-ahwr-event/ineligibility-event')
     await onIneligibilityEvent(
       testCase.given.context,
       testCase.given.event

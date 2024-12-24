@@ -1,8 +1,7 @@
-const createTableClient = require('../azure-storage/create-table-client')
+import { createTableClient } from '../azure-storage/create-table-client.mjs'
 
-const TABLE_NAME = 'monitoring'
-
-const saveMonitoring = async (context, event) => {
+export const saveMonitoring = async (context, event) => {
+  const TABLE_NAME = 'monitoring'
   const raisedEvent = event.properties
   const eventType = raisedEvent.action.type
   const eventRaised = new Date(raisedEvent.action.raisedOn)
@@ -31,5 +30,3 @@ const saveMonitoring = async (context, event) => {
 
   context.log.info(`Monitoring Event saved successfully: partitionKey: ${partitionKey}, rowKey: ${rowKey}`)
 }
-
-module.exports = { saveMonitoring }

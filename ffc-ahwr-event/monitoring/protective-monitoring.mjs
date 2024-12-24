@@ -1,6 +1,6 @@
-const { PublishEvent } = require('ffc-protective-monitoring')
+import { PublishEvent } from 'ffc-protective-monitoring'
 
-async function saveMonitoringEvent (context, event) {
+export async function saveMonitoringEvent (context, event) {
   const raisedEvent = event.properties
   const { sbi, ip } = raisedEvent
   const cph = raisedEvent.cph.replace(/\//g, '')
@@ -8,7 +8,7 @@ async function saveMonitoringEvent (context, event) {
 
   await protectiveMonitoring.sendEvent({
     sessionid: raisedEvent.id.toString(),
-    datetime: createEventDate(),
+    datetime: new Date().toISOString(),
     version: '1.1',
     application: process.env.MONITORING_APPLICATION,
     component: 'Annual health and welfare review of livestock',
@@ -22,10 +22,3 @@ async function saveMonitoringEvent (context, event) {
 
   context.log.info(`Protective monitoring event sent successfully for SBI ${sbi}, CPH ${cph}`)
 }
-
-function createEventDate () {
-  const eventDate = new Date()
-  return eventDate.toISOString()
-}
-
-module.exports = { saveMonitoringEvent }
