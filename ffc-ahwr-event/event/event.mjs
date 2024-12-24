@@ -1,4 +1,4 @@
-import { queryEntities } from '../azure-storage/query-entities'
+import { queryEntities } from '../azure-storage/query-entities.mjs'
 
 export const saveEvent = async (context, event) => {
   const tableName = process.env.AZURE_STORAGE_TABLE

@@ -6,6 +6,7 @@
   "contributors": [
     "Steve Dickinson <steve.dickinson@defra.gov.uk"
   ],
+  "main": "ffc-ahwr-event/index.mjs",
   "scripts": {
     "lint": "standard --fix",
     "start": "func start -p 7080",

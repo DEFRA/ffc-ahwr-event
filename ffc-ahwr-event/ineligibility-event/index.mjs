@@ -1,4 +1,4 @@
-import { queryEntities } from '../azure-storage/query-entities'
+import { queryEntities } from '../azure-storage/query-entities.mjs'
 
 export const onIneligibilityEvent = async (context, event) => {
   const partitionKey = `${event.properties.action.data.sbi}`

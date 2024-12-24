@@ -1,4 +1,4 @@
-import { saveMonitoringEvent } from '../../../ffc-ahwr-event/monitoring/protective-monitoring'
+import { saveMonitoringEvent } from '../../../ffc-ahwr-event/monitoring/protective-monitoring.mjs'
 import mockContext from '../../mock/mock-context'
 
 const mockSendEvent = jest.fn()

@@ -1,5 +1,5 @@
-import { queryEntities } from '../../../ffc-ahwr-event/azure-storage/query-entities'
-import { saveEvent } from '../../../ffc-ahwr-event/event/event'
+import { queryEntities } from '../../../ffc-ahwr-event/azure-storage/query-entities.mjs'
+import { saveEvent } from '../../../ffc-ahwr-event/event/event.mjs'
 import mockContext, { bindings } from '../../mock/mock-context'
 
 jest.mock('../../../ffc-ahwr-event/azure-storage/query-entities')

@@ -1,4 +1,4 @@
-import { onApplicationStatusEvent } from '../../../ffc-ahwr-event/application-status-event'
+import { onApplicationStatusEvent } from '../../../ffc-ahwr-event/application-status-event/index.mjs'
 
 const mockListEntities = jest.fn()
 

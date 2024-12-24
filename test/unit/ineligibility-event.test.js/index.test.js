@@ -1,4 +1,4 @@
-import { onIneligibilityEvent } from '../../../ffc-ahwr-event/ineligibility-event'
+import { onIneligibilityEvent } from '../../../ffc-ahwr-event/ineligibility-event/index.mjs'
 
 const mockListEntities = jest.fn()
 

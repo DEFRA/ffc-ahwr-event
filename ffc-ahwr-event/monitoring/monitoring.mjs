@@ -1,4 +1,4 @@
-import { createTableClient } from '../azure-storage/create-table-client'
+import { createTableClient } from '../azure-storage/create-table-client.mjs'
 
 export const saveMonitoring = async (context, event) => {
   const TABLE_NAME = 'monitoring'

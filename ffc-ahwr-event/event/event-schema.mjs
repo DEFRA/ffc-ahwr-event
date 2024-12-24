@@ -1,4 +1,4 @@
-const joi = require('joi')
+import joi from 'joi'
 
 const eventSchema = joi.object({
   name: joi.string().required(),

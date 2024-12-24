@@ -1,5 +1,5 @@
 import { odata } from '@azure/data-tables'
-import { createTableClient } from '../azure-storage/create-table-client'
+import { createTableClient } from './create-table-client.mjs'
 
 export const queryEntities = async (tableName, partitionKey, rowKey, eventType) => {
   const events = []

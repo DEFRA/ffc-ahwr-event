@@ -1,9 +1,9 @@
-import { saveEvent } from './event/event'
-import { validateEvent } from './event/event-schema'
-import { saveMonitoring } from './monitoring/monitoring'
-import { saveMonitoringEvent } from './monitoring/protective-monitoring'
-import { onApplicationStatusEvent } from './application-status-event'
-import { onIneligibilityEvent } from './ineligibility-event'
+import { saveEvent } from './event/event.mjs'
+import { validateEvent } from './event/event-schema.mjs'
+import { saveMonitoring } from './monitoring/monitoring.mjs'
+import { saveMonitoringEvent } from './monitoring/protective-monitoring.mjs'
+import { onApplicationStatusEvent } from './application-status-event/index.mjs'
+import { onIneligibilityEvent } from './ineligibility-event/index.mjs'
 
 export default async function (context, message) {
   const event = message

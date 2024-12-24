@@ -1,4 +1,4 @@
-import { queryEntities } from '../../../ffc-ahwr-event/azure-storage/query-entities'
+import { queryEntities } from '../../../ffc-ahwr-event/azure-storage/query-entities.mjs'
 
 jest.mock('@azure/identity', () => {
   return {

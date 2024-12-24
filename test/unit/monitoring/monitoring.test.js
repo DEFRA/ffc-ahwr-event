@@ -1,5 +1,5 @@
-import { createTableClient } from '../../../ffc-ahwr-event/azure-storage/create-table-client'
-import { saveMonitoring } from '../../../ffc-ahwr-event/monitoring/monitoring'
+import { createTableClient } from '../../../ffc-ahwr-event/azure-storage/create-table-client.mjs'
+import { saveMonitoring } from '../../../ffc-ahwr-event/monitoring/monitoring.mjs'
 
 jest.mock('../../../ffc-ahwr-event/azure-storage/create-table-client')
 

@@ -1,9 +1,9 @@
-import { saveEvent } from '../../ffc-ahwr-event/event/event'
-import { saveMonitoring } from '../../ffc-ahwr-event/monitoring/monitoring'
-import { saveMonitoringEvent } from '../../ffc-ahwr-event/monitoring/protective-monitoring'
-import { onApplicationStatusEvent } from '../../ffc-ahwr-event/application-status-event'
-import { onIneligibilityEvent } from '../../ffc-ahwr-event/ineligibility-event'
-import processEvent from '../../ffc-ahwr-event/index'
+import { saveEvent } from '../../ffc-ahwr-event/event/event.mjs'
+import { saveMonitoring } from '../../ffc-ahwr-event/monitoring/monitoring.mjs'
+import { saveMonitoringEvent } from '../../ffc-ahwr-event/monitoring/protective-monitoring.mjs'
+import { onApplicationStatusEvent } from '../../ffc-ahwr-event/application-status-event/index.mjs'
+import { onIneligibilityEvent } from '../../ffc-ahwr-event/ineligibility-event/index.mjs'
+import processEvent from '../../ffc-ahwr-event/index.mjs'
 import mockContext from '../mock/mock-context'
 
 jest.mock('../../ffc-ahwr-event/event/event')
