@@ -1,34 +1,31 @@
+import { queryEntities } from '../../../ffc-ahwr-event/azure-storage/query-entities.mjs'
+
+jest.mock('@azure/identity', () => {
+  return {
+    DefaultAzureCredential: jest.fn().mockImplementation(() => {
+    })
+  }
+})
+
+jest.mock('@azure/data-tables', () => {
+  return {
+    odata: jest.fn(),
+    TableClient: jest.fn().mockImplementation(() => {
+      return {
+        createTable: jest.fn(),
+        listEntities: jest.fn().mockImplementation(() => {
+          return [
+            { PartitionKey: '123', RowKey: '456', eventType: 'event1' },
+            { PartitionKey: '123', RowKey: '789', eventType: 'event2' },
+            { PartitionKey: '123', RowKey: '101112', eventType: 'event3' }
+          ]
+        })
+      }
+    })
+  }
+})
+
 describe('storage function', () => {
-  let queryEntities
-
-  beforeAll(() => {
-    jest.mock('@azure/identity', () => {
-      return {
-        DefaultAzureCredential: jest.fn().mockImplementation(() => {
-        })
-      }
-    })
-    jest.mock('@azure/data-tables', () => {
-      return {
-        odata: jest.fn(),
-        TableClient: jest.fn().mockImplementation(() => {
-          return {
-            createTable: jest.fn(),
-            listEntities: jest.fn().mockImplementation(() => {
-              return [
-                { PartitionKey: '123', RowKey: '456', eventType: 'event1' },
-                { PartitionKey: '123', RowKey: '789', eventType: 'event2' },
-                { PartitionKey: '123', RowKey: '101112', eventType: 'event3' }
-              ]
-            })
-          }
-        })
-      }
-    })
-
-    queryEntities = require('../../../ffc-ahwr-event/azure-storage/query-entities')
-  })
-
   afterAll(() => {
     jest.resetModules()
   })

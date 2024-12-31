@@ -1,7 +1,7 @@
-const { odata } = require('@azure/data-tables')
-const createTableClient = require('../azure-storage/create-table-client')
+import { odata } from '@azure/data-tables'
+import { createTableClient } from './create-table-client.mjs'
 
-const queryEntities = async (tableName, partitionKey, rowKey, eventType) => {
+export const queryEntities = async (tableName, partitionKey, rowKey, eventType) => {
   const events = []
   if (tableName && partitionKey && rowKey && eventType) {
     const tableClient = createTableClient(tableName)
@@ -20,5 +20,3 @@ const queryEntities = async (tableName, partitionKey, rowKey, eventType) => {
 
   return events
 }
-
-module.exports = queryEntities

@@ -1,4 +1,4 @@
-const joi = require('joi')
+import joi from 'joi'
 
 const eventSchema = joi.object({
   name: joi.string().required(),
@@ -21,7 +21,7 @@ const eventSchema = joi.object({
   })
 })
 
-const validateEvent = (event) => {
+export const validateEvent = (event) => {
   const validate = eventSchema.validate(event)
 
   if (validate.error) {
@@ -31,5 +31,3 @@ const validateEvent = (event) => {
 
   return true
 }
-
-module.exports = { validateEvent }
