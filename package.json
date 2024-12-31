@@ -12,8 +12,8 @@
     "start": "func start -p 7080",
     "start:detached": "func start -p 7080 1> /dev/null 2> /dev/null &",
     "start:verbose": "func start -p 7080 --verbose",
-    "test": "NODE_ENV=development jest",
-    "test:watch": "NODE_ENV=development jest --coverage=false --onlyChanged --watch",
+    "test": "jest",
+    "test:watch": "jest --coverage=false --onlyChanged --watch",
     "pretest": "npm run lint"
   },
   "dependencies": {
@@ -54,7 +54,7 @@
   },
   "babel": {
     "env": {
-      "development": {
+      "test": {
         "plugins": ["@babel/plugin-transform-modules-commonjs"]
       }
     }
