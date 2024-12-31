@@ -24,7 +24,7 @@ module.exports = {
   testEnvironment: 'node',
   testPathIgnorePatterns: [],
   setupFilesAfterEnv: ['./jest.setup.js'],
-  verbose: false,
+  verbose: true,
   transform: {
     '^.+\\.jsx?$': 'babel-jest',
     '^.+\\.mjs$': 'babel-jest'
