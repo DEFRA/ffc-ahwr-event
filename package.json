@@ -1,6 +1,6 @@
 {
   "name": "ffc-ahwr-event",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "description": "Azure Function to process Vet Vists back office events",
   "author": "Defra",
   "contributors": [
@@ -53,10 +53,6 @@
     ]
   },
   "babel": {
-    "env": {
-      "test": {
-        "plugins": ["@babel/plugin-transform-modules-commonjs"]
-      }
-    }
+    "plugins": ["@babel/plugin-transform-modules-commonjs"]
   }
 }
