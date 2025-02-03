@@ -27,6 +27,4 @@ export const saveMonitoring = async (context, event) => {
 
   context.bindings.tableMonitoringBinding = []
   context.bindings.tableMonitoringBinding.push(eventMonitoringLog)
-
-  context.log.info(`Monitoring Event saved successfully: partitionKey: ${partitionKey}, rowKey: ${rowKey}`)
 }

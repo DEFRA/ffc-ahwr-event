@@ -24,13 +24,7 @@ export const onIneligibilityEvent = async (context, event) => {
     ChangedBy: event.properties.action.raisedBy,
     ChangedOn: event.properties.action.raisedOn
   }
-  console.log(`${new Date().toISOString()} 'ineligibility-event' created: ${JSON.stringify(
-    ineligibilityEvent
-  )}`)
+
   context.bindings.ineligibilityBinding = []
   context.bindings.ineligibilityBinding.push(ineligibilityEvent)
-  console.log(`${new Date().toISOString()} 'ineligibility-event' has been saved successfully: ${JSON.stringify({
-    partitionKey,
-    rowKey
-  })}`)
 }
