@@ -1,11 +1,8 @@
 {
   "name": "ffc-ahwr-event",
-  "version": "0.8.7",
+  "version": "0.9.0",
   "description": "Azure Function to process Vet Vists back office events",
   "author": "Defra",
-  "contributors": [
-    "Steve Dickinson <steve.dickinson@defra.gov.uk"
-  ],
   "main": "ffc-ahwr-event/index.mjs",
   "scripts": {
     "lint": "standard --fix",
