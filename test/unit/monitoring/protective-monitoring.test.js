@@ -1,5 +1,4 @@
 import { saveMonitoringEvent } from '../../../ffc-ahwr-event/monitoring/protective-monitoring.mjs'
-import mockContext from '../../mock/mock-context'
 
 const mockSendEvent = jest.fn()
 jest.mock('ffc-protective-monitoring', () => {
@@ -11,7 +10,7 @@ jest.mock('ffc-protective-monitoring', () => {
 })
 
 describe('Event function', () => {
-  const message = {
+  const event = {
     properties: {
       id: '123456789',
       sbi: '123456789',
@@ -34,7 +33,7 @@ describe('Event function', () => {
   })
 
   test('Send event', async () => {
-    await saveMonitoringEvent(mockContext, message)
+    await saveMonitoringEvent(event)
     expect(mockSendEvent).toHaveBeenCalledTimes(1)
   })
 })

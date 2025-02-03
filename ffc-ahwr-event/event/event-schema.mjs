@@ -25,8 +25,7 @@ export const validateEvent = (event) => {
   const validate = eventSchema.validate(event)
 
   if (validate.error) {
-    console.log('Event validation error', validate.error)
-    return false
+    throw new Error(validate.error.message)
   }
 
   return true
