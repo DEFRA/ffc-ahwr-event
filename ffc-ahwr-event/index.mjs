@@ -36,5 +36,6 @@ export default async function (context, event) {
     context.log.info(`event received: ${JSON.stringify(loggerInfo)}`)
   } catch (err) {
     context.log.error(`event error: ${JSON.stringify(loggerInfo)}`)
+    throw err
   }
 }
