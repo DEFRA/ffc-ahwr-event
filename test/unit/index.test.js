@@ -1,7 +1,6 @@
 import { saveEvent } from '../../ffc-ahwr-event/event/event.mjs'
 import { saveMonitoring } from '../../ffc-ahwr-event/monitoring/monitoring.mjs'
 import { saveMonitoringEvent } from '../../ffc-ahwr-event/monitoring/protective-monitoring.mjs'
-import { onApplicationStatusEvent } from '../../ffc-ahwr-event/application-status-event/index.mjs'
 import { onIneligibilityEvent } from '../../ffc-ahwr-event/ineligibility-event/index.mjs'
 import processEvent from '../../ffc-ahwr-event/index.mjs'
 import mockContext from '../mock/mock-context'
@@ -9,7 +8,6 @@ import mockContext from '../mock/mock-context'
 jest.mock('../../ffc-ahwr-event/event/event')
 jest.mock('../../ffc-ahwr-event/monitoring/monitoring')
 jest.mock('../../ffc-ahwr-event/monitoring/protective-monitoring')
-jest.mock('../../ffc-ahwr-event/application-status-event')
 jest.mock('../../ffc-ahwr-event/ineligibility-event')
 
 let message
@@ -83,8 +81,7 @@ describe('index function', () => {
 
       await processEvent(mockContext, message)
 
-      expect(onApplicationStatusEvent).toHaveBeenCalledTimes(1)
-      expect(onApplicationStatusEvent).toHaveBeenCalledWith(mockContext, message)
+      expect(mockContext.log.error).toHaveBeenCalledWith('no longer supporting application-status-event: {"name":"application-status-event","sbi":"123456789","message":"test"}')
       expect(saveMonitoring).toHaveBeenCalledTimes(0)
       expect(saveMonitoringEvent).toHaveBeenCalledTimes(0)
     })
