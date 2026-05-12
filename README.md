@@ -114,9 +114,52 @@ completed, specifically for
 [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
 
 
-## CI pipeline
+## Azure DevOps Pipeline
 
-This service uses the [FFC CI pipeline](https://github.com/DEFRA/ffc-jenkins-pipeline-library)
+The pipeline is defined in `azure-pipelines.yml` and can be found at:
+https://dev.azure.com/defragovuk/DEFRA-FFC/_build?definitionId=11321
+
+It runs through five sequential stages: **CI → SND2 → DEV → TEST → PRE → PRD**. All deploy stages only run on the `main` branch.
+
+### Variable Groups
+
+Each environment has its own variable group in the Azure DevOps Library (**Pipelines → Library**). Create the following groups:
+
+| Variable Group Name |
+|---|
+| `ffc-ahwr-event-snd2` |
+| `ffc-ahwr-event-dev` |
+| `ffc-ahwr-event-test` |
+| `ffc-ahwr-event-pre` |
+| `ffc-ahwr-event-prd` |
+
+Each group must contain the following variables. Mark secrets with the lock icon in the Azure DevOps UI.
+
+| Variable | Secret | Description |
+|---|---|---|
+| `STORAGE_ACCOUNT_NAME` | No | Storage account name which contains blobs and tables |
+| `APPLICATIONINSIGHTS_CONNECTION_STRING` | Yes | Application Insights connection string |
+| `AzureWebJobsStorage` | No |  |
+| `ENVIRONMENT` | No |  |
+| `FUNCTIONS_WORKER_RUNTIME` | No | |
+| `APPLICATIONINSIGHTS_CONNECTION_STRING` | Yes |  |
+| `WEBSITE_NODE_DEFAULT_VERSION` | No |  |
+| `WEBSITE_RUN_FROM_PACKAGE` | No |  |
+
+
+> **Note:** Each variable group must be linked to the pipeline. In the Library, open each group and under **Pipeline permissions** add the pipeline defined above.
+
+### Service Connections
+
+Service connections are hardcoded per stage in `azure-pipelines.yml`:
+
+| Stage | Service Connection |
+|---|---|
+| SND2 | `AZD-FFC-SND2` |
+| DEV | `AZD-FFC-DEV1` |
+| TEST | `AZD-FFC-DEV1` |
+| PRE | `AZP-FFC-PRE1` |
+| PRD | `AZR-FFC-PRD1` |
 
 ## License
 
