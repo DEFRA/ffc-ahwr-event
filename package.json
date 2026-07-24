@@ -4,6 +4,9 @@
   "description": "Azure Function to process Vet Vists back office events",
   "author": "Defra",
   "main": "ffc-ahwr-event/index.mjs",
+  "engines": {
+    "npm": ">=11.10.0"
+  },
   "scripts": {
     "lint": "standard --fix",
     "lint:knip": "knip --production --exclude binaries,exports",
