@@ -6,7 +6,7 @@
   "main": "ffc-ahwr-event/index.mjs",
   "scripts": {
     "lint": "standard --fix",
-    "lint:knip": "knip --production --exclude exports",
+    "lint:knip": "knip --production --exclude binaries,exports",
     "start": "func start -p 7080",
     "start:detached": "func start -p 7080 1> /dev/null 2> /dev/null &",
     "start:verbose": "func start -p 7080 --verbose",
