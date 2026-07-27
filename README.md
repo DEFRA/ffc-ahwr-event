@@ -116,7 +116,7 @@ completed, specifically for
 
 ## CI pipeline
 
-This service uses the [FFC CI pipeline](https://github.com/DEFRA/ffc-jenkins-pipeline-library)
+This service previously used the Jenkins pipeline. Deployments are done with the existing Azure pipeline.
 
 ## License
 
