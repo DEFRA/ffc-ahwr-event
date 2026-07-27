@@ -40,11 +40,11 @@ describe('storage function', () => {
     const rowKey = '123_456'
     const eventType = 'event1'
     const events = await queryEntities(tableName, partitionKey, rowKey, eventType)
-    expect(events.length).toEqual(3)
+    expect(events).toHaveLength(3)
   })
 
   test('return 0 events as no partition key or row key is supplied', async () => {
     const events = await queryEntities()
-    expect(events.length).toEqual(0)
+    expect(events).toHaveLength(0)
   })
 })
