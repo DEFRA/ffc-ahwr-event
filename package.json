@@ -32,6 +32,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.28.6",
     "@types/jest": "^27.0.0",
     "eslint": "9.29.0",
+    "husky": "9.1.7",
     "knip": "6.29.0",
     "nano-staged": "1.0.2",
     "neostandard": "0.13.0",
