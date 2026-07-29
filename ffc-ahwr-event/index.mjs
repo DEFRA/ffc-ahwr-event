@@ -4,7 +4,7 @@ import { saveMonitoring } from './monitoring/monitoring.mjs'
 import { saveMonitoringEvent } from './monitoring/protective-monitoring.mjs'
 import { onIneligibilityEvent } from './ineligibility-event/index.mjs'
 
-export default async function main (context, event) {
+export default async function main(context, event) {
   const loggerInfo = {
     name: event.name,
     sbi: event.properties.sbi,
@@ -21,7 +21,9 @@ export default async function main (context, event) {
         }
         break
       case 'application-status-event':
-        context.log.error(`no longer supporting application-status-event: ${JSON.stringify(loggerInfo)}`)
+        context.log.error(
+          `no longer supporting application-status-event: ${JSON.stringify(loggerInfo)}`
+        )
         break
       case 'send-ineligibility-event':
         await onIneligibilityEvent(context, event)

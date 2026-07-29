@@ -1,6 +1,6 @@
 import { PublishEvent } from 'ffc-protective-monitoring'
 
-export async function saveMonitoringEvent (event) {
+export async function saveMonitoringEvent(event) {
   const protectiveMonitoring = new PublishEvent(process.env.MONITORING_URL)
 
   await protectiveMonitoring.sendEvent({

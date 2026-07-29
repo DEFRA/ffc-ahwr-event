@@ -10,14 +10,16 @@ const eventSchema = joi.object({
     status: joi.string().required(),
     ip: joi.string().optional(),
     reference: joi.string().optional(),
-    action: joi.object({
-      type: joi.string().required(),
-      message: joi.string().required(),
-      data: joi.object(),
-      raisedOn: joi.date().required(),
-      raisedBy: joi.string().required(),
-      timestamp: joi.string().optional()
-    }).required()
+    action: joi
+      .object({
+        type: joi.string().required(),
+        message: joi.string().required(),
+        data: joi.object(),
+        raisedOn: joi.date().required(),
+        raisedBy: joi.string().required(),
+        timestamp: joi.string().optional()
+      })
+      .required()
   })
 })
 
