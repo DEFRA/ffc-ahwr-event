@@ -12,6 +12,10 @@ This [Azure Function app](https://azure.microsoft.com/en-gb/services/functions/)
 - Configure `.local.settings.json` to include live connection strings and keys for service as required
 - Rename `.local.settings.json` to `local.settings.json`
 
+### pre-commit
+
+Please install [pre-commit](https://pre-commit.com/), as it is used to scan commits for secrets using [Gitleaks](https://github.com/gitleaks/gitleaks).
+
 ## Example message
 
 ```
