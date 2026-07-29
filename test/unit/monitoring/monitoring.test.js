@@ -17,11 +17,9 @@ describe('Monitoring function', () => {
           type: 'action',
           raisedOn: Date.now(),
           raisedBy: 'user'
-
         },
         status: 'status'
       }
-
     }
     const mockCreateTable = jest.fn()
 

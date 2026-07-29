@@ -52,15 +52,17 @@ describe('index function', () => {
 
     test('receives message from service bus with invalid id and does not calls save event', async () => {
       message.properties.id = 123456789
-      await expect(() => processEvent(mockContext, message))
-        .rejects.toThrow('"properties.id" must be a string')
+      await expect(() => processEvent(mockContext, message)).rejects.toThrow(
+        '"properties.id" must be a string'
+      )
       expect(saveEvent).toHaveBeenCalledTimes(0)
     })
 
     test('receives message from service bus with no action property and does not calls save event', async () => {
       delete message.properties.action
-      await expect(() => processEvent(mockContext, message))
-        .rejects.toThrow('"properties.action" is required')
+      await expect(() => processEvent(mockContext, message)).rejects.toThrow(
+        '"properties.action" is required'
+      )
       expect(saveEvent).toHaveBeenCalledTimes(0)
     })
   })
@@ -81,7 +83,9 @@ describe('index function', () => {
 
       await processEvent(mockContext, message)
 
-      expect(mockContext.log.error).toHaveBeenCalledWith('no longer supporting application-status-event: {"name":"application-status-event","sbi":"123456789","message":"test"}')
+      expect(mockContext.log.error).toHaveBeenCalledWith(
+        'no longer supporting application-status-event: {"name":"application-status-event","sbi":"123456789","message":"test"}'
+      )
       expect(saveMonitoring).toHaveBeenCalledTimes(0)
       expect(saveMonitoringEvent).toHaveBeenCalledTimes(0)
     })

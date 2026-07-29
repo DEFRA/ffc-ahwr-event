@@ -1,4 +1,5 @@
 # FFC AHWR event
+
 FFC AHWR event to process events from the vet visits back office service.
 
 This [Azure Function app](https://azure.microsoft.com/en-gb/services/functions/) is triggered from a service bus message requesting an event message.
@@ -24,7 +25,7 @@ This [Azure Function app](https://azure.microsoft.com/en-gb/services/functions/)
       type: 'change',
       message: 'editing',
       data: {
-        state: { 
+        state: {
           original: { name: 'test data 1' },
           new: { name: 'test data 2' }
         }
@@ -56,7 +57,7 @@ If any option other than `1` is taken, then the connection strings in `local.set
 
 ## Configuration
 
-The `local.settings.json` is required to hold all local development environment values. As this file contains sensitive values, it is excluded from source control. The `.local.settings.json` file is a template for this and needs amended to include valid information. 
+The `local.settings.json` is required to hold all local development environment values. As this file contains sensitive values, it is excluded from source control. The `.local.settings.json` file is a template for this and needs amended to include valid information.
 
 Example:
 
@@ -112,7 +113,6 @@ or
 The documentation within this repo assumes the `command line` setup has been
 completed, specifically for
 [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
-
 
 ## CI pipeline
 

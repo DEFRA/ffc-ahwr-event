@@ -29,8 +29,7 @@ describe('onIneligibilityEvent', () => {
   beforeEach(() => {
     jest.mock('@azure/identity', () => {
       return {
-        DefaultAzureCredential: jest.fn().mockImplementation(() => {
-        })
+        DefaultAzureCredential: jest.fn().mockImplementation(() => {})
       }
     })
   })
@@ -111,9 +110,7 @@ describe('onIneligibilityEvent', () => {
         }
       },
       when: {
-        entities: [
-          { PartitionKey: '123456789', RowKey: '123456789_', event: 'event1' }
-        ]
+        entities: [{ PartitionKey: '123456789', RowKey: '123456789_', event: 'event1' }]
       },
       expect: {
         ineligibilityBinding: [
@@ -138,12 +135,10 @@ describe('onIneligibilityEvent', () => {
 
     mockListEntities.mockReturnValueOnce(mockEntities)
 
-    await onIneligibilityEvent(
-      testCase.given.context,
-      testCase.given.event
-    )
+    await onIneligibilityEvent(testCase.given.context, testCase.given.event)
 
-    expect(testCase.given.context.bindings.ineligibilityBinding)
-      .toEqual(testCase.expect.ineligibilityBinding)
+    expect(testCase.given.context.bindings.ineligibilityBinding).toEqual(
+      testCase.expect.ineligibilityBinding
+    )
   })
 })
