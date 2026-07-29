@@ -35,16 +35,18 @@ describe('Event function', () => {
     queryEntities.mockResolvedValue([{ test: 'test' }])
     await saveEvent(mockContext, { ...message, name: 'some-other-event' })
     expect(queryEntities).toHaveBeenCalledTimes(1)
-    expect(mockContext.bindings.tableBinding).toEqual([{
-      EventBy: 'test',
-      EventRaised: expect.any(Date),
-      EventType: 'event',
-      PartitionKey: '123456789',
-      Payload: expect.any(String),
-      RowKey: expect.any(String),
-      SessionId: '123456789',
-      Status: 'in progress'
-    }])
+    expect(mockContext.bindings.tableBinding).toEqual([
+      {
+        EventBy: 'test',
+        EventRaised: expect.any(Date),
+        EventType: 'event',
+        PartitionKey: '123456789',
+        Payload: expect.any(String),
+        RowKey: expect.any(String),
+        SessionId: '123456789',
+        Status: 'in progress'
+      }
+    ])
   })
 
   test('Duplicated event found created', async () => {

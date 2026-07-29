@@ -6,13 +6,11 @@ export const queryEntities = async (tableName, partitionKey, rowKey, eventType) 
   if (tableName && partitionKey && rowKey && eventType) {
     const tableClient = createTableClient(tableName)
     await tableClient.createTable(tableName)
-    const eventResults = tableClient.listEntities(
-      {
-        queryOptions: {
-          filter: odata`PartitionKey eq ${partitionKey} and RowKey eq ${rowKey} and EventType eq ${eventType}`
-        }
+    const eventResults = tableClient.listEntities({
+      queryOptions: {
+        filter: odata`PartitionKey eq ${partitionKey} and RowKey eq ${rowKey} and EventType eq ${eventType}`
       }
-    )
+    })
     for await (const event of eventResults) {
       events.push(event)
     }

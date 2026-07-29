@@ -2,8 +2,7 @@ import { queryEntities } from '../../../ffc-ahwr-event/azure-storage/query-entit
 
 jest.mock('@azure/identity', () => {
   return {
-    DefaultAzureCredential: jest.fn().mockImplementation(() => {
-    })
+    DefaultAzureCredential: jest.fn().mockImplementation(() => {})
   }
 })
 
