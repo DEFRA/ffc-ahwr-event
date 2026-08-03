@@ -1,6 +1,6 @@
 module.exports = {
   collectCoverage: true,
-  collectCoverageFrom: ['**/*.mjs', '!**/*.test.mjs'],
+  collectCoverageFrom: ['**/*.mjs', '!**/*.test.mjs', '!.prettierrc.mjs', '!eslint.config.mjs'],
   coverageDirectory: 'test-output',
   coverageReporters: ['text-summary', 'lcov'],
   coveragePathIgnorePatterns: [

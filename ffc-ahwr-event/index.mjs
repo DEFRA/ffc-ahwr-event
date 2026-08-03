@@ -16,9 +16,8 @@ export default async function main(context, event) {
     switch (event.name) {
       case 'send-session-event':
       case 'send-invalid-data-event':
-        if (validateEvent(event)) {
-          await saveEvent(context, event)
-        }
+        validateEvent(event)
+        await saveEvent(context, event)
         break
       case 'application-status-event':
         context.log.error(

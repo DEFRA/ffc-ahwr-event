@@ -34,4 +34,32 @@ describe('Monitoring function', () => {
     expect(createTableClient).toHaveBeenCalledTimes(1)
     expect(mockCreateTable).toHaveBeenCalledTimes(1)
   })
+
+  test('saveMonitoring defaults EventBy to unknown when raisedBy is absent', async () => {
+    const context = {
+      bindings: {
+        tableMonitoringBinding: []
+      }
+    }
+    const event = {
+      properties: {
+        id: '13345',
+        action: {
+          type: 'action',
+          raisedOn: Date.now()
+        },
+        status: 'status'
+      }
+    }
+
+    createTableClient.mockImplementationOnce(() => {
+      return {
+        createTable: jest.fn()
+      }
+    })
+
+    await saveMonitoring(context, event)
+
+    expect(context.bindings.tableMonitoringBinding[0].EventBy).toBe('unknown')
+  })
 })
