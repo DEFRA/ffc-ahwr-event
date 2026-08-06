@@ -75,6 +75,14 @@ describe('index function', () => {
       expect(saveMonitoring).toHaveBeenCalledTimes(1)
       expect(saveMonitoringEvent).toHaveBeenCalledTimes(1)
     })
+
+    test('receives message from service bus but does not forward when monitoring disabled', async () => {
+      message.name = 'send-monitoring-event'
+      process.env.MONITORING_ENABLED = 'false'
+      await processEvent(mockContext, message)
+      expect(saveMonitoring).toHaveBeenCalledTimes(1)
+      expect(saveMonitoringEvent).toHaveBeenCalledTimes(0)
+    })
   })
 
   describe('application-status-event', () => {
