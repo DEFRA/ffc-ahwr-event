@@ -9,10 +9,8 @@ export default [
     noJsx: true,
     noStyle: true
   }),
+  sonarjs.configs.recommended,
   {
-    plugins: {
-      sonarjs
-    },
     rules: {
       'sonarjs/no-commented-code': 'error'
     }
