@@ -1,0 +1,59 @@
+#!/usr/bin/env node
+
+// Sends a test event onto the local Service Bus emulator queue, so you can
+// watch `ffc-ahwr-event` pick it up and process it (run `npm start` first).
+//
+// Usage:
+//   ./scripts/send-test-event
+//   ./scripts/send-test-event send-ineligibility-event
+//
+// Requires the Service Bus Emulator + Azurite from docker-compose.yaml to be
+// running (`docker compose up -d`).
+
+const { ServiceBusClient } = require('@azure/service-bus')
+
+const connectionString =
+  'Endpoint=sb://localhost;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SAS_KEY_VALUE;UseDevelopmentEmulator=true;'
+const queueName = process.env.AHWR_EVENT_QUEUE || 'ffc-ahwr-event'
+
+const message = {
+  name: 'send-session-event',
+  properties: {
+    id: '57aa1c17-8b4d-463a-993f-4ac306e86ecd',
+    sbi: '106257600',
+    cph: 'n/a',
+    checkpoint: 'Get funding to improve animal health and welfare',
+    status: 'success',
+    action: {
+      type: 'claim-reference',
+      message: 'Session set for claim and reference.',
+      data: {
+        reference: 'TEMP-CLAIM-WGX5-4AKI',
+        applicationReference: 'IAHW-D9D1-648D'
+      },
+      raisedBy: 'farmer@farm.com',
+      raisedOn: '2026-03-23T08:08:44.888Z'
+    }
+  }
+}
+
+if (process.argv[2]) {
+  message.name = process.argv[2]
+}
+
+async function main () {
+  const sbClient = new ServiceBusClient(connectionString)
+  const sender = sbClient.createSender(queueName)
+
+  await sender.sendMessages({ body: message })
+  console.log(`Sent "${message.name}" to queue "${queueName}":`)
+  console.log(JSON.stringify(message, null, 2))
+
+  await sender.close()
+  await sbClient.close()
+}
+
+main().catch((err) => {
+  console.error('Failed to send test event:', err)
+  process.exit(1)
+})

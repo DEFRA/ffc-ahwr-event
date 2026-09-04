@@ -16,6 +16,7 @@
     "start": "func start -p 7080",
     "start:detached": "func start -p 7080 1> /dev/null 2> /dev/null &",
     "start:verbose": "func start -p 7080 --verbose",
+    "send:test-event": "./scripts/send-test-event",
     "test": "jest",
     "test:watch": "jest --coverage=false --onlyChanged --watch",
     "pretest": "npm run lint",
@@ -31,6 +32,7 @@
     "fast-xml-parser": "5.8.0"
   },
   "devDependencies": {
+    "@azure/service-bus": "7.9.5",
     "@babel/core": "^7.29.0",
     "@babel/plugin-transform-modules-commonjs": "^7.28.6",
     "@types/jest": "^27.0.0",
