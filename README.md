@@ -59,15 +59,41 @@ See [Microsoft's guide](https://docs.microsoft.com/en-us/azure/storage/common/st
 
 If any option other than `1` is taken, then the connection strings in `local.settings.json` will need to be updated.
 
+## Service Bus
+
+This function is triggered by a Service Bus queue message. To support local development, there are several options:
+
+1. Use the [Azure Service Bus Emulator](https://learn.microsoft.com/en-us/azure/service-bus-messaging/overview-emulator) via the Docker Compose file in this repository (recommended).
+
+Running `docker compose up -d` also starts a SQL Edge container (used by the emulator to store its metadata) and the emulator itself, pre-configured via `servicebus-emulator-config.json` with a `ffc-ahwr-event` queue matching `AHWR_EVENT_QUEUE` below.
+
+> On Apple Silicon Macs, SQL Edge runs under x86 emulation and can occasionally crash on startup. Both containers are configured with `restart: on-failure`, so Docker retries automatically — give it a few seconds if the emulator doesn't come up straight away.
+
+2. Use Azure cloud hosted Service Bus
+
+Point `ServiceBusConnectionString` and `AHWR_EVENT_QUEUE` in `local.settings.json` at a real namespace and queue instead.
+
+### Sending a test event
+
+With the containers running (`docker compose up -d`) and the function started (`./scripts/start`), publish a message onto the local queue with:
+
+```
+./scripts/send-test-event
+```
+
+This sends an example `send-session-event` payload and prints what it sent — watch the function's own logs to see it get picked up and processed. Pass a different event name as an argument to exercise other cases (the rest of the payload stays the same):
+
+```
+./scripts/send-test-event send-ineligibility-event
+```
+
 ## Configuration
 
 The `local.settings.json` is required to hold all local development environment values. As this file contains sensitive values, it is excluded from source control. The `.local.settings.json` file is a template for this and needs amended to include valid information.
 
 Example:
 
-For blob, examples assumes option `1` is taken above and therefore shows connection strings for local Azurite container.
-
-It's likely that the Service Bus topic and subscription names will need to be amended to match those owned by the developer.
+The example below assumes options `1` is taken for both storage and Service Bus above, and therefore shows connection strings for the local Azurite container and Service Bus Emulator. The ports match this repository's `docker-compose.yaml`.
 
 ```
 
@@ -75,15 +101,13 @@ It's likely that the Service Bus topic and subscription names will need to be am
   "IsEncrypted": false,
   "Values": {
     "FUNCTIONS_WORKER_RUNTIME": "node",
-    "AzureWebJobsStorage": "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10001/devstoreaccount1;QueueEndpoint=http://127.0.0.1:10002/devstoreaccount1;",
-    "ServiceBusConnectionString": "",
-    "TableConnectionString": "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;TableEndpoint=http://127.0.0.1:10003/devstoreaccount1",
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10020/devstoreaccount1;QueueEndpoint=http://127.0.0.1:10021/devstoreaccount1;TableEndpoint=http://127.0.0.1:10022/devstoreaccount1;",
+    "ServiceBusConnectionString": "Endpoint=sb://localhost;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SAS_KEY_VALUE;UseDevelopmentEmulator=true;",
+    "TableConnectionString": "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;TableEndpoint=http://127.0.0.1:10022/devstoreaccount1",
     "AZURE_STORAGE_USE_CONNECTION_STRING": "true",
     "AZURE_STORAGE_ACCOUNT_NAME": "devstoreaccount1",
     "AZURE_STORAGE_TABLE": "ahwreventstore",
-    "AHWR_EVENT_TOPIC": "ffc-ahwr-event",
-    "AHWR_EVENT_SUBSCRIPTION": "ffc-ahwr-event",
-    "AHWR_EVENT_PROJECTION_TOPIC": "ffc-ahwr-event-projection"
+    "AHWR_EVENT_QUEUE": "ffc-ahwr-event"
   }
 }
 
