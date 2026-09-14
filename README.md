@@ -158,6 +158,16 @@ applications when using this information.
 
 > Contains public sector information licensed under the Open Government license v3
 
+## Dependabot
+
+Currently setup to work into four groups, so we don't have PRs per package. The updates run once a week, on a Monday. Except for the security group, which is advisory-triggered and ignores the schedule.
+
+## SonarCloud
+
+This project is set up to integrate with sonarcloud, and scans will be performed on all pull requests, and on
+publish to main branch. We follow the quality gates as per DEFRA standards, and if coverage falls below the
+acceptable level, or new issues are introduced the build will fail.
+
 ### About the licence
 
 The Open Government Licence (OGL) was developed by the Controller of Her Majesty's Stationery Office (HMSO) to enable information providers in the public sector to license the use and re-use of their information under a common open licence.
