@@ -24,9 +24,9 @@
   },
   "dependencies": {
     "@azure/data-tables": "^13.2.0",
-    "@azure/identity": "4.2.1",
+    "@azure/identity": "4.13.3",
     "ffc-protective-monitoring": "^1.0.4",
-    "joi": "17.13.6"
+    "joi": "17.13.7"
   },
   "overrides": {
     "fast-xml-parser": "5.8.0"
