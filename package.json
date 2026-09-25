@@ -36,17 +36,17 @@
     "@babel/core": "^7.29.0",
     "@babel/plugin-transform-modules-commonjs": "^7.28.6",
     "@types/jest": "^30.0.0",
-    "babel-jest": "30.5.1",
+    "babel-jest": "30.5.2",
     "eslint": "9.29.0",
-    "eslint-plugin-sonarjs": "4.2.0",
+    "eslint-plugin-sonarjs": "4.2.1",
     "husky": "9.1.7",
-    "jest": "30.5.1",
+    "jest": "30.5.2",
     "jest-junit": "17.0.0",
     "jest-when": "4.0.3",
-    "knip": "6.34.0",
+    "knip": "6.37.0",
     "nano-staged": "1.0.2",
     "neostandard": "0.13.0",
-    "prettier": "3.9.6"
+    "prettier": "3.9.8"
   },
   "homepage": "https://github.com/DEFRA/ffc-ahwr-event",
   "repository": {
